@@ -23,7 +23,7 @@ CREATE TABLE clients (
   telephone varchar(10) DEFAULT NULL,
   etat int(11) DEFAULT 0,
   genre int(11) DEFAULT 0,
-  CONSTRAINT fk_id_adresse_clients FOREIGN KEY (id_adresse) REFERENCES adresses(id)
+  CONSTRAINT fk_adresse_clients FOREIGN KEY (id_adresse) REFERENCES adresses(id)
 );
 
 CREATE TABLE paiements(
@@ -32,19 +32,20 @@ CREATE TABLE paiements(
     code_confidentiel VARCHAR(4) NOT NULL,
     banque VARCHAR(255) NOT NULL,
     id_client INT NOT NULL,
-    CONSTRAINT fk_id_client_paiements FOREIGN KEY (id_client) REFERENCES clients(id)
+    CONSTRAINT fk_client_paiements FOREIGN KEY (id_client) REFERENCES clients(id)
 );
 
 CREATE TABLE paniers (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_client INT NOT NULL,
-    CONSTRAINT fk_id_client_paniers FOREIGN KEY (id_client) REFERENCES clients(id)
+    CONSTRAINT fk_client_paniers FOREIGN KEY (id_client) REFERENCES clients(id)
 );
 
-CREATE TABLE commandes (
+CREATE TABLE contient (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_panier INT NOT NULL,
     id_produit INT NOT NULL,
-    CONSTRAINT fk_id_panier_commandes FOREIGN KEY (id_panier) REFERENCES paniers(id),
-    CONSTRAINT fk_id_produit_commandes FOREIGN KEY (id_produit) REFERENCES produits(id)
+    quantite INT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_panier_contient FOREIGN KEY (id_panier) REFERENCES paniers(id),
+    CONSTRAINT fk_produit_contient FOREIGN KEY (id_produit) REFERENCES produits(id)
 );
