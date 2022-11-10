@@ -1,6 +1,6 @@
 package model;
 
-public class Paiements {
+public class Paiement {
 	
 	private Long   id;
     private String numero_carte;
@@ -9,11 +9,11 @@ public class Paiements {
     
   //Constructeur
     
-    public Paiements() {  
+    public Paiement() {  
     	
     }
     
-    public Paiements(String numero_carte, String code_confidentiel, String banque) {
+    public Paiement(String numero_carte, String code_confidentiel, String banque) {
     	this.numero_carte = numero_carte;
     	this.code_confidentiel = code_confidentiel;
     	this.banque = banque;
