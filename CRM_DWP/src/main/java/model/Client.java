@@ -1,10 +1,10 @@
 package model;
 
-public class Clients {
+public class Client {
 	private Long   id;
     private String nom;
     private String prenom;
-    private Adresses adresses;
+    private Adresse adresses;
     private String nom_societe;
     private String mail;
     private String telephone;
@@ -12,11 +12,11 @@ public class Clients {
     private int genre;
     
      //Constructeur
-	public Clients() {
+	public Client() {
 	
 	}
 	
-	public Clients(String nom, String prenom, Adresses adresses, String nom_societe, String mail, String telephone,
+	public Client(String nom, String prenom, Adresse adresses, String nom_societe, String mail, String telephone,
 			int etat, int genre) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -53,11 +53,11 @@ public class Clients {
 		this.prenom = prenom;
 	}
 
-	public Adresses getAdresses() {
+	public Adresse getAdresses() {
 		return adresses;
 	}
 
-	public void setAdresses(Adresses adresses) {
+	public void setAdresses(Adresse adresses) {
 		this.adresses = adresses;
 	}
 

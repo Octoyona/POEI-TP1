@@ -1,17 +1,17 @@
 package model;
 
-public class Produits {
+public class Produit {
 	private Long   id;
     private String nom;
     private String description;
     private Float prix;
     
        //Constructeur 
-	public Produits() {
+	public Produit() {
 	
 	}
 	
-	public Produits(String nom, String description, Float prix) {
+	public Produit(String nom, String description, Float prix) {
 		this.nom = nom;
 		this.description = description;
 		this.prix = prix;

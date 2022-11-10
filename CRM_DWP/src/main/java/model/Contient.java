@@ -2,12 +2,12 @@ package model;
 
 public class Contient {
 	private Long   id;
-    private Paniers paniers;
-    private Produits produits;
+    private Panier paniers;
+    private Produit produits;
     private int quantité;
     
     //Constructeurs
-	public Contient(Paniers paniers, Produits produits, int quantité) {
+	public Contient(Panier paniers, Produit produits, int quantité) {
 		this.paniers = paniers;
 		this.produits = produits;
 		this.quantité = quantité;
@@ -27,19 +27,19 @@ public class Contient {
 		this.id = id;
 	}
 
-	public Paniers getPaniers() {
+	public Panier getPaniers() {
 		return paniers;
 	}
 
-	public void setPaniers(Paniers paniers) {
+	public void setPaniers(Panier paniers) {
 		this.paniers = paniers;
 	}
 
-	public Produits getProduits() {
+	public Produit getProduits() {
 		return produits;
 	}
 
-	public void setProduits(Produits produits) {
+	public void setProduits(Produit produits) {
 		this.produits = produits;
 	}
 
