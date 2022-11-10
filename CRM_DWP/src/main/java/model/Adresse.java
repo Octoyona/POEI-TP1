@@ -1,6 +1,6 @@
 package model;
 
-public class Adresses {
+public class Adresse {
 	private Long   id;
     private String rue;
     private String ville;
@@ -9,10 +9,10 @@ public class Adresses {
     
   //Constructeur
     
-	public Adresses() {
+	public Adresse() {
 		
 	}
-	public Adresses(String rue, String ville, String code_postal, String pays) {
+	public Adresse(String rue, String ville, String code_postal, String pays) {
 		this.rue = rue;
 		this.ville = ville;
 		this.code_postal = code_postal;
