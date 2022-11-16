@@ -4,7 +4,7 @@ public class Client {
 	private Long   id;
     private String nom;
     private String prenom;
-    private Adresse adresses;
+    private Adresse adresse;
     private String nom_societe;
     private String mail;
     private String telephone;
@@ -16,11 +16,11 @@ public class Client {
 	
 	}
 	
-	public Client(String nom, String prenom, Adresse adresses, String nom_societe, String mail, String telephone,
+	public Client(String nom, String prenom, Adresse adresse, String nom_societe, String mail, String telephone,
 			int etat, int genre) {
 		this.nom = nom;
 		this.prenom = prenom;
-		this.adresses = adresses;
+		this.adresse = adresse;
 		this.nom_societe = nom_societe;
 		this.mail = mail;
 		this.telephone = telephone;
@@ -53,12 +53,12 @@ public class Client {
 		this.prenom = prenom;
 	}
 
-	public Adresse getAdresses() {
-		return adresses;
+	public Adresse getAdresse() {
+		return adresse;
 	}
 
-	public void setAdresses(Adresse adresses) {
-		this.adresses = adresses;
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
 	}
 
 	public String getNom_societe() {
@@ -103,7 +103,7 @@ public class Client {
     
 	@Override
 	public String toString() {
-		return getId() + " : " + getNom() + " " + getPrenom() + " - " + getAdresses() + " - " + getNom_societe() + " - " 
+		return getId() + " : " + getNom() + " " + getPrenom() + " - " + getAdresse() + " - " + getNom_societe() + " - " 
 	+ getMail() + " - " + getTelephone() + " - " + getEtat() + " - " + getGenre();
 	}
  
