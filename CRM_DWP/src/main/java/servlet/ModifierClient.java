@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ClientDao;
+import dao.AdresseDao;
 import dao.DaoException;
 import dao.DaoFactory;
 import model.Client;
@@ -20,24 +22,21 @@ import model.Client;
 @WebServlet("/modifierClient")
 public class ModifierClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private ClientDao clientDao;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ModifierClient() {
         super();
-        ClientDao = DaoFactory.getInstance().ClientDao();
+        ClientDao clientDao = DaoFactory.getInstance().getClientDao();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
 		try {
 			long id = Long.parseLong(request.getParameter("id"));
-			request.setAttribute("client", ClientDao.trouver(id));
+			request.setAttribute("client", clientDao.trouver(id));
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
@@ -50,8 +49,10 @@ public class ModifierClient extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Map<String, String> erreurs = new HashMap<String, String>();
+		
+		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
+		AdresseDao adresseDao = DaoFactory.getInstance().getAdresseDao();
 		
 		String nom = request.getParameter("nomClient");
 		String prenom = request.getParameter("prenomClient");
@@ -119,7 +120,7 @@ public class ModifierClient extends HttpServlet {
 		client.setTelephone(telephone);
 		client.setMail(email);
 		client.setNom_societe(nomsociete);
-		client.setAdresses(AdresseDao.trouver(idAdresse));
+		client.setAdresses(adresseDao.trouver(idAdresse));
 		client.setGenre(genre);
 		client.setEtat(etat);
 		
