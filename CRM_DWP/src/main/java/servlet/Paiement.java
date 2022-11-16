@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoFactory;
+import model.Paniers;
+
 /**
  * Servlet implementation class Paiement
  */
@@ -27,7 +30,7 @@ public class Paiement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Panier panierclient = DaoFactory.getInstance().getPanierDao();
+		Paniers panierclient = DaoFactory.getInstance().getPanierDao();
 		
 		try {
 			request.setAttribute("panier", panierclient.lister());
