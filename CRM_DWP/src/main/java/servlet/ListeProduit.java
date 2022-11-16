@@ -13,24 +13,15 @@ import dao.PanierDao;
 import dao.ProduitDao;
 import model.Contient;
 import model.Produit;
-/**
- * Servlet implementation class ChoixProduit
- */
-@WebServlet("/choixProduit")
-public class ChoixProduit extends HttpServlet {
+
+@WebServlet("/listeProduit")
+public class ListeProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ChoixProduit() {
+    public ListeProduit() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProduitDao produitsDao = DaoFactory.getInstance().getProduitDao();
@@ -47,9 +38,6 @@ public class ChoixProduit extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
