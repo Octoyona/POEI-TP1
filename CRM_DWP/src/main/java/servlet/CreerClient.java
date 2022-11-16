@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoException;
 import dao.DaoFactory;
+import model.Adresse;
 import model.Client;
 import dao.ClientDao;
 import dao.AdresseDao;
@@ -35,7 +36,7 @@ public class CreerClient extends HttpServlet {
 		
 		Map<String, String> erreurs = new HashMap<String, String>();
 		
-		AdresseDao adresseDao = DaoFactory.getInstance().getClientDao();
+		AdresseDao adresseDao = DaoFactory.getInstance().getAdresseDao();
 		
 		String nom = request.getParameter("nomClient");
 		String prenom = request.getParameter("prenomClient");
@@ -98,7 +99,16 @@ public class CreerClient extends HttpServlet {
 		client.setNom_societe(nomsociete);
 		client.setGenre(genre);
 		client.setEtat(etat);
-		client.setAdresse(adresseDao.trouver(idAdresse));
+		
+		try {
+			Adresse adresse = adresseDao.trouver(idAdresse);
+			client.setAdresse(adresse);
+		} catch(DaoException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		
 		if(erreurs.isEmpty()) {
 			try {

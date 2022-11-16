@@ -16,27 +16,21 @@ import model.Contient;
 import model.Panier;
 import model.Produit;
 
-@WebServlet("/listeProduit")
+@WebServlet("/listeProduits")
 public class ListeProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ListeProduit() {
-        super();
-    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		ProduitDao produitsDao = DaoFactory.getInstance().getProduitDao();
 		
 		try {
 			request.setAttribute("produits", produitsDao.lister());
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		
-		this.getServletContext().getRequestDispatcher("listeProduits.jsp").forward(request, response);
+		System.err.println("test");
+		this.getServletContext().getRequestDispatcher("/WEB-INF/listeProduits.jsp").forward(request, response);
 
 	}
 

@@ -14,6 +14,7 @@ import dao.ClientDao;
 import dao.AdresseDao;
 import dao.DaoException;
 import dao.DaoFactory;
+import model.Adresse;
 import model.Client;
 
 @WebServlet("/modifierClient")
@@ -106,8 +107,13 @@ public class ModifierClient extends HttpServlet {
 		client.setMail(mail);
 		client.setNom_societe(nomsociete);
 		
-		client.setAdresse(adresseDao.trouver(idAdresse));
-
+		try {
+			Adresse adresse = adresseDao.trouver(idAdresse);
+			client.setAdresse(adresse);
+		} catch(DaoException e) {
+			e.printStackTrace();
+		}
+		
 		client.setGenre(genre);
 		client.setEtat(etat);
 		

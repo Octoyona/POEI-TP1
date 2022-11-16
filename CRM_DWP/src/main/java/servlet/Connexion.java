@@ -10,19 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import utils.Configuration;
 
-/**
- * Servlet implementation class Connection
- */
 @WebServlet("/connexion")
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String login = request.getParameter("login");
@@ -38,8 +33,5 @@ public class Connexion extends HttpServlet {
 			request.setAttribute("loginMessage", "Identifiants incorrects...");
 			this.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 		}
-		
-		
 	}
-
 }

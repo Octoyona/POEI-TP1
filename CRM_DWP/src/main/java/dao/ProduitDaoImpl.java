@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.DaoException;
 import model.Produit;
 
 public class ProduitDaoImpl implements ProduitDao {
