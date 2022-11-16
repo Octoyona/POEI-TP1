@@ -50,6 +50,10 @@ public class DaoFactory {
 		return new ClientDaoImpl( this );
 	}
 	
+	public ProduitDao getProduitDao() {
+		return new ProduitDaoImpl( this );
+	}
+	
 	//Pourquoi on doit faire un throws SQL exception ?
 	Connection getConnection() throws SQLException {
 		if(this.con == null) {

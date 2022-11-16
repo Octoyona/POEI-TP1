@@ -49,7 +49,7 @@ public class CreerClient extends HttpServlet {
 		String prenom = request.getParameter("prenomClient");
 		String telephone = request.getParameter("telephoneClient");
 		String nomsociete = request.getParameter("nomSociete");
-		String email = request.getParameter("emailClient");
+		String mail = request.getParameter("mailClient");
 		Long idAdresse = Long.parseLong(request.getParameter("adresseClient"));
 		int genre = Integer.parseInt(request.getParameter("genreClient"));
 		int etat = Integer.parseInt(request.getParameter("etatClient"));
@@ -88,11 +88,11 @@ public class CreerClient extends HttpServlet {
 			}
 		}
 			
-		if(email != null) {
-			if(email.length() > 60) {
+		if(mail != null) {
+			if(mail.length() > 60) {
 				erreurs.put("emailClient", "Un email doit avoir maximum 60 caractères.");
 			}
-			if(!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+			if(!mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 				erreurs.put("emailClient", "Merci d'entrer une adresse email valide.");
 			}
 		}
@@ -101,11 +101,11 @@ public class CreerClient extends HttpServlet {
 		client.setNom(nom);
 		client.setPrenom(prenom);
 		client.setTelephone(telephone);
-		client.setMail(email);
+		client.setMail(mail);
 		client.setNom_societe(nomsociete);
 		client.setGenre(genre);
 		client.setEtat(etat);
-		client.setAdresses(AdresseDao.trouver(idAdresse));
+		client.setAdresse(AdresseDao.trouver(idAdresse));
 		
 		
 		if(erreurs.isEmpty()) {
