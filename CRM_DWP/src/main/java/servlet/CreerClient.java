@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoException;
 import dao.DaoFactory;
-import model.Clients;
+import model.Client;
+import dao.ClientDao;
 
 /**
  * Servlet implementation class CreerClient
  */
-@WebServlet("/CreerClient")
+@WebServlet("/creerClient")
 public class CreerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +27,7 @@ public class CreerClient extends HttpServlet {
      */
     public CreerClient() {
         super();
-        ClientDAO = DaoFactory.getInstance().getClientDao();
+        ClientDao = DaoFactory.getInstance().getClientDao();
     }
 
 	/**
@@ -49,7 +50,9 @@ public class CreerClient extends HttpServlet {
 		String telephone = request.getParameter("telephoneClient");
 		String nomsociete = request.getParameter("nomSociete");
 		String email = request.getParameter("emailClient");
-		Long idAdresse = Long.parseLong(request.getParameter("AdresseClient"));
+		Long idAdresse = Long.parseLong(request.getParameter("adresseClient"));
+		int genre = Integer.parseInt(request.getParameter("genreClient"));
+		int etat = Integer.parseInt(request.getParameter("etatClient"));
 		
 		
 		//Ajout des contrôles
@@ -64,8 +67,9 @@ public class CreerClient extends HttpServlet {
 		if(prenom != null) {
 			if(prenom.length() > 20) {
 				erreurs.put("prenomClient", "Votre prénom doit avoir maximum 20 caractères.");
+			} else {
+				erreurs.put("prenomClient", "Merci d'entrer un prénom.");
 			}
-		}
 		
 		if(telephone != null) {
 			if(telephone.length() > 10) {
@@ -93,13 +97,16 @@ public class CreerClient extends HttpServlet {
 			}
 		}
 		
-		Clients client = new Clients();
+		Client client = new Client();
 		client.setNom(nom);
 		client.setPrenom(prenom);
 		client.setTelephone(telephone);
 		client.setMail(email);
 		client.setNom_societe(nomsociete);
-		client.setAdresses(AdressesDao.trouver(idAdresse));
+		client.setGenre(genre);
+		client.setEtat(etat);
+		client.setAdresses(AdresseDao.trouver(idAdresse));
+		
 		
 		if(erreurs.isEmpty()) {
 			try {
