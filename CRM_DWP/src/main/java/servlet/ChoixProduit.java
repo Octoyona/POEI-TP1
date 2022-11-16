@@ -7,14 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoException;
 import dao.DaoFactory;
+import dao.PanierDao;
+import dao.ProduitDao;
 import model.Contient;
-import model.Produits;
-
+import model.Produit;
 /**
  * Servlet implementation class ChoixProduit
  */
-@WebServlet("/ChoixProduit")
+@WebServlet("/choixProduit")
 public class ChoixProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -66,9 +68,9 @@ public class ChoixProduit extends HttpServlet {
 		}
 	
 		ProduitDao produitDao = DaoFactory.getInstance().getProduitDao();
-		Produits produitChoisi = produitDao.trouver(idProduitChoisi);	
+		Produit produitChoisi = produitDao.trouver(idProduitChoisi);	
 		PanierDao panierDao = DaoFactory.getInstance().getPanierDao();
-		int idPanier = panierDao.trouver(idClient).getId();
+		Long idPanier = panierDao.trouver(idClient).getId();
 		ContientDao contientDao = DaoFactory.getInstance().getContientDao();
 		Contient contient = new Contient(produitChoisi, idPanier, quantite);
 		contientDao.creer(contient);

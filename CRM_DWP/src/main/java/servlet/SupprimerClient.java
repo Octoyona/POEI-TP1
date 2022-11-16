@@ -9,21 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoException;
 import dao.DaoFactory;
-import model.Panier;
 
 /**
- * Servlet implementation class Paiement
+ * Servlet implementation class SupprimerClient
  */
-@WebServlet("/paiement")
-public class Paiement extends HttpServlet {
+@WebServlet("/supprimerClient")
+public class SupprimerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private ClientDao clientDao;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Paiement() {
+    public SupprimerClient() {
         super();
-        // TODO Auto-generated constructor stub
+        clientDao = DaoFactory.getInstance().getClientDao();
     }
 
 	/**
@@ -31,15 +32,7 @@ public class Paiement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Panier panierclient = DaoFactory.getInstance().getPanierDao();
-		
-		try {
-			request.setAttribute("panier", panierclient.lister());
-		} catch (DaoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -47,16 +40,16 @@ public class Paiement extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	
-		Paiement paiementclient = DaoFactory.getInstance().get();
-		
 		try {
-			request.setAttribute("paiement", paiementclient.payer());
+			long id = Long.parseLong(request.getParameter("id"));
+			clientDao.supprimer(id);
+			
+			//Ajout d'un élément dans la session
+			request.getSession().setAttribute("confirmMessage", "Votre compte a bien été supprimé !");
 		} catch (DaoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		response.sendRedirect( request.getContextPath() + "/listeProduits" );
 	}
-
 }
