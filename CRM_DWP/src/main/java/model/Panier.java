@@ -1,15 +1,15 @@
 package model;
 
-public class Paniers {
+public class Panier {
 	private Long   id;
-    private Clients clients;
+    private Client clients;
     
     //Constructeurs
-	public Paniers() {
+	public Panier() {
 		
 	}
 	
-	public Paniers(Clients clients) {
+	public Panier(Client clients) {
 		this.clients = clients;
 	}
 
@@ -23,11 +23,11 @@ public class Paniers {
 		this.id = id;
 	}
 
-	public Clients getClients() {
+	public Client getClients() {
 		return clients;
 	}
 
-	public void setClients(Clients clients) {
+	public void setClients(Client clients) {
 		this.clients = clients;
 	}
   
