@@ -21,7 +21,10 @@ import dao.AdresseDao;
 public class CreerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	ClientDao clientDao;
+	private ClientDao clientDao;
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public CreerClient() {
         super();
         clientDao = DaoFactory.getInstance().getClientDao();
@@ -126,4 +129,5 @@ public class CreerClient extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/creerClient.jsp").forward(request, response);
 		}	
 	}
+}
 }
