@@ -22,12 +22,13 @@ import dao.ClientDao;
 public class CreerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private ClientDao clientDao;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CreerClient() {
         super();
-        ClientDao = DaoFactory.getInstance().getClientDao();
+        clientDao = DaoFactory.getInstance().getClientDao();
     }
 
 	/**
@@ -110,7 +111,7 @@ public class CreerClient extends HttpServlet {
 		
 		if(erreurs.isEmpty()) {
 			try {
-				ClientDao.creer(client);
+				clientDao.creer(client);
 				request.getSession().setAttribute("confirmMessage", "Votre compte client a bien été créé !");
 				
 				response.sendRedirect( request.getContextPath() + "/listeProduits" );
@@ -125,4 +126,5 @@ public class CreerClient extends HttpServlet {
 		}	
 	}
 
+}
 }
