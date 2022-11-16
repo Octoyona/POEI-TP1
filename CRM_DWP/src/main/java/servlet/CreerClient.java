@@ -14,36 +14,28 @@ import dao.DaoException;
 import dao.DaoFactory;
 import model.Client;
 import dao.ClientDao;
+import dao.AdresseDao;
 
-/**
- * Servlet implementation class CreerClient
- */
 @WebServlet("/creerClient")
 public class CreerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+	ClientDao clientDao;
     public CreerClient() {
         super();
-        ClientDao = DaoFactory.getInstance().getClientDao();
+        clientDao = DaoFactory.getInstance().getClientDao();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().getRequestDispatcher("/WEB-INF/creerClient.jsp").forward(request, response);
 	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Map<String, String> erreurs = new HashMap<String, String>();
+		
+		AdresseDao adresseDao = DaoFactory.getInstance().getClientDao();
 		
 		String nom = request.getParameter("nomClient");
 		String prenom = request.getParameter("prenomClient");
@@ -105,12 +97,16 @@ public class CreerClient extends HttpServlet {
 		client.setNom_societe(nomsociete);
 		client.setGenre(genre);
 		client.setEtat(etat);
+<<<<<<< HEAD
 		client.setAdresse(AdresseDao.trouver(idAdresse));
+=======
+		client.setAdresse(adresseDao.trouver(idAdresse));
+>>>>>>> antoine
 		
 		
 		if(erreurs.isEmpty()) {
 			try {
-				ClientDao.creer(client);
+				clientDao.creer(client);
 				request.getSession().setAttribute("confirmMessage", "Votre compte client a bien été créé !");
 				
 				response.sendRedirect( request.getContextPath() + "/listeProduits" );

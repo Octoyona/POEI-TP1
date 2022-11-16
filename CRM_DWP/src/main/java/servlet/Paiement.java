@@ -9,32 +9,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoException;
 import dao.DaoFactory;
+import dao.PaiementDao;
+import dao.PanierDao;
 import model.Panier;
 
-/**
- * Servlet implementation class Paiement
- */
 @WebServlet("/paiement")
 public class Paiement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Paiement() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+       	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Panier panierclient = DaoFactory.getInstance().getPanierDao();
+		PanierDao panierDao = DaoFactory.getInstance().getPanierDao();
 		
 		try {
-			request.setAttribute("panier", panierclient.lister());
+			request.setAttribute("panier", panierDao.lister());
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,16 +30,13 @@ public class Paiement extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	
-		Paiement paiementclient = DaoFactory.getInstance().get();
+		Paiement paiementDao = DaoFactory.getInstance().getPaiementDao();
 		
 		try {
-			request.setAttribute("paiement", paiementclient.payer());
+			request.setAttribute("paiement", paiementDao.creer());
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

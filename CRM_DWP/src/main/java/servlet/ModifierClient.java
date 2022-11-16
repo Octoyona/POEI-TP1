@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClientDao;
+<<<<<<< HEAD
+=======
+import dao.AdresseDao;
+>>>>>>> antoine
 import dao.DaoException;
 import dao.DaoFactory;
 import model.Client;
@@ -21,21 +25,22 @@ import model.Client;
 @WebServlet("/modifierClient")
 public class ModifierClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	private ClientDao clientDao;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ModifierClient() {
         super();
+<<<<<<< HEAD
         clientDao = DaoFactory.getInstance().getClientDao();
+=======
+        ClientDao clientDao = DaoFactory.getInstance().getClientDao();
+>>>>>>> antoine
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
 		try {
 			long id = Long.parseLong(request.getParameter("id"));
 			request.setAttribute("client", clientDao.trouver(id));
@@ -51,8 +56,10 @@ public class ModifierClient extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		Map<String, String> erreurs = new HashMap<String, String>();
+		
+		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
+		AdresseDao adresseDao = DaoFactory.getInstance().getAdresseDao();
 		
 		String nom = request.getParameter("nomClient");
 		String prenom = request.getParameter("prenomClient");
@@ -120,7 +127,11 @@ public class ModifierClient extends HttpServlet {
 		client.setTelephone(telephone);
 		client.setMail(mail);
 		client.setNom_societe(nomsociete);
+<<<<<<< HEAD
 		client.setAdresse(AdresseDao.trouver(idAdresse)); 
+=======
+		client.setAdresses(adresseDao.trouver(idAdresse));
+>>>>>>> antoine
 		client.setGenre(genre);
 		client.setEtat(etat);
 		
