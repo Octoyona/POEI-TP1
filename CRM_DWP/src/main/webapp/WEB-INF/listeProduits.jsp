@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Liste Clients</title>
+<title>Liste Produits</title>
 </head>
 <body>
 	<c:import url="/WEB-INF/menu.jsp"/>
@@ -26,7 +26,7 @@
 						<td><c:out value="${produit.nom}"/></td>
 						<td><c:out value="${produit.description}"/></td>
 						<td><c:out value="${produit.prix}"/></td>
-						<td><a>Ajouter</a></td>
+						<td><a>Ajouter au panier</a></td>
 					</tr>
 				</c:forEach>
 			</table>
