@@ -14,23 +14,13 @@ import dao.ClientDao;
 import dao.AdresseDao;
 import dao.DaoException;
 import dao.DaoFactory;
+import model.Adresse;
 import model.Client;
 
-/**
- * Servlet implementation class ModifierClient
- */
 @WebServlet("/modifierClient")
 public class ModifierClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ModifierClient() {
-        super();
-        ClientDao clientDao = DaoFactory.getInstance().getClientDao();
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
@@ -44,10 +34,6 @@ public class ModifierClient extends HttpServlet {
 		this.getServletContext().getRequestDispatcher("/WEB-INF/modifierClient.jsp").forward(request, response);
 	}
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> erreurs = new HashMap<String, String>();
 		
@@ -58,7 +44,7 @@ public class ModifierClient extends HttpServlet {
 		String prenom = request.getParameter("prenomClient");
 		String telephone = request.getParameter("telephoneClient");
 		String nomsociete = request.getParameter("nomSociete");
-		String email = request.getParameter("emailClient");
+		String mail = request.getParameter("mailClient");
 		Long idAdresse = Long.parseLong(request.getParameter("AdresseClient"));
 		int genre = Integer.parseInt(request.getParameter("genreClient"));
 		int etat = Integer.parseInt(request.getParameter("etatClient"));
@@ -97,12 +83,12 @@ public class ModifierClient extends HttpServlet {
 					}
 				}
 					
-				if(email != null) {
-					if(email.length() > 60) {
-						erreurs.put("emailClient", "Un email doit avoir maximum 60 caractères.");
+				if(mail != null) {
+					if(mail.length() > 60) {
+						erreurs.put("mailClient", "Un mail doit avoir maximum 60 caractères.");
 					}
-					if(!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-						erreurs.put("emailClient", "Merci d'entrer une adresse email valide.");
+					if(!mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+						erreurs.put("mailClient", "Merci d'entrer une adresse mail valide.");
 					}
 				}
 				
@@ -118,9 +104,16 @@ public class ModifierClient extends HttpServlet {
 		client.setNom(nom);
 		client.setPrenom(prenom);
 		client.setTelephone(telephone);
-		client.setMail(email);
+		client.setMail(mail);
 		client.setNom_societe(nomsociete);
-		client.setAdresses(adresseDao.trouver(idAdresse));
+		
+		try {
+			Adresse adresse = adresseDao.trouver(idAdresse);
+			client.setAdresse(adresse);
+		} catch(DaoException e) {
+			e.printStackTrace();
+		}
+		
 		client.setGenre(genre);
 		client.setEtat(etat);
 		
@@ -142,5 +135,4 @@ public class ModifierClient extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/modifierClient.jsp").forward(request, response);
 		}	
 	}
-
 }

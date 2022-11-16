@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import servlet.AdresseDao;
-
 public class DaoFactory {
 
 	private String url;
@@ -39,19 +37,19 @@ public class DaoFactory {
 //	//Faire les différents "getter"  
 //	public XxxDao getXxxDao() {
 //		return new XxxDaoImpl(this);
-//	}
-	public ClientDao getClientDao() {
-		return new ClientDaoImpl( this );
-	}
-	
-	public ProduitDao getProduitDao() {
-		return new ProduitDaoImpl( this );
-	}
 	
 	public PanierDao getPanierDao() {
 		return new PanierDaoImpl( this );
 	}
-	
+
+	public ProduitDao getProduitDao() {
+		return new ProduitDaoImpl( this );
+	}
+
+	public ClientDao getClientDao() {
+		return new ClientDaoImpl( this );
+	}
+		
 	public PaiementDao getPaiementDao() {
 		return new PaiementDaoImpl( this );
 	}
@@ -60,7 +58,10 @@ public class DaoFactory {
 		return new AdresseDaoImpl( this );
 	}
 	
-	//Pourquoi on doit faire un throws SQL exception ?
+	public ContientDao getContientDao() {
+		return new ContientDaoImpl( this );
+	}
+	
 	Connection getConnection() throws SQLException {
 		if(this.con == null) {
 			this.con = DriverManager.getConnection(url, username, passwd);
@@ -70,7 +71,7 @@ public class DaoFactory {
 	
 	void releaseConnection(Connection connectionRendue) {
 		if (this.con ==null) {
-			return;   //pourquoi ?
+			return;
 		}
 		try {
 			if( ! this.con.isValid(10)) { 
@@ -82,3 +83,5 @@ public class DaoFactory {
 		}
 	}
 }
+
+

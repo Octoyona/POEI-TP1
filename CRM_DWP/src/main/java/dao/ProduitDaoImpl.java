@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.DaoException;
 import model.Produit;
 
 public class ProduitDaoImpl implements ProduitDao {
@@ -163,7 +162,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			ps.close();
 			
 	    } catch(SQLException e) {
-	    	throw new DaoException("Echec modificiation du Produit",e);
+	    	throw new DaoException("Echec modification du Produit",e);
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
