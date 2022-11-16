@@ -163,7 +163,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			ps.close();
 			
 	    } catch(SQLException e) {
-	    	throw new DaoException("Echec modificiation du Produit",e);
+	    	throw new DaoException("Echec modification du Produit",e);
 	    } finally {
 	    	factory.releaseConnection(con);
 		}

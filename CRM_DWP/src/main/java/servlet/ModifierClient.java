@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ClientDao;
 import dao.DaoException;
 import dao.DaoFactory;
 import model.Client;
@@ -28,7 +29,7 @@ public class ModifierClient extends HttpServlet {
      */
     public ModifierClient() {
         super();
-        ClientDao = DaoFactory.getInstance().ClientDao();
+        clientDao = DaoFactory.getInstance().getClientDao();
     }
 
 	/**
@@ -37,7 +38,7 @@ public class ModifierClient extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			long id = Long.parseLong(request.getParameter("id"));
-			request.setAttribute("client", ClientDao.trouver(id));
+			request.setAttribute("client", clientDao.trouver(id));
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +58,7 @@ public class ModifierClient extends HttpServlet {
 		String prenom = request.getParameter("prenomClient");
 		String telephone = request.getParameter("telephoneClient");
 		String nomsociete = request.getParameter("nomSociete");
-		String email = request.getParameter("emailClient");
+		String mail = request.getParameter("mailClient");
 		Long idAdresse = Long.parseLong(request.getParameter("AdresseClient"));
 		int genre = Integer.parseInt(request.getParameter("genreClient"));
 		int etat = Integer.parseInt(request.getParameter("etatClient"));
@@ -96,12 +97,12 @@ public class ModifierClient extends HttpServlet {
 					}
 				}
 					
-				if(email != null) {
-					if(email.length() > 60) {
-						erreurs.put("emailClient", "Un email doit avoir maximum 60 caractères.");
+				if(mail != null) {
+					if(mail.length() > 60) {
+						erreurs.put("mailClient", "Un mail doit avoir maximum 60 caractères.");
 					}
-					if(!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-						erreurs.put("emailClient", "Merci d'entrer une adresse email valide.");
+					if(!mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+						erreurs.put("mailClient", "Merci d'entrer une adresse mail valide.");
 					}
 				}
 				
@@ -117,9 +118,9 @@ public class ModifierClient extends HttpServlet {
 		client.setNom(nom);
 		client.setPrenom(prenom);
 		client.setTelephone(telephone);
-		client.setMail(email);
+		client.setMail(mail);
 		client.setNom_societe(nomsociete);
-		client.setAdresses(AdresseDao.trouver(idAdresse));
+		client.setAdresse(AdresseDao.trouver(idAdresse)); 
 		client.setGenre(genre);
 		client.setEtat(etat);
 		
