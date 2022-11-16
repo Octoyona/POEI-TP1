@@ -38,6 +38,9 @@ public class DaoFactory {
 //	public XxxDao getXxxDao() {
 //		return new XxxDaoImpl(this);
 //	}
+	public ClientDao getClientDao() {
+		return new ClientDaoImpl( this );
+	}
 	
 	//Pourquoi on doit faire un throws SQL exception ?
 	Connection getConnection() throws SQLException {
