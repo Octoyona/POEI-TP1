@@ -14,10 +14,11 @@ public class Paiement {
     	
     }
     
-    public Paiement(String numero_carte, String code_confidentiel, String banque) {
+    public Paiement(String numero_carte, String code_confidentiel, String banque, Client client) {
     	this.numero_carte = numero_carte;
     	this.code_confidentiel = code_confidentiel;
     	this.banque = banque;
+    	this.client = client;
     }
 
     //Getters & setters
@@ -53,7 +54,6 @@ public class Paiement {
 		this.banque = banque;
 	}
 	
-	
 	public Client getClient() {
 		return client;
 	}
@@ -61,10 +61,10 @@ public class Paiement {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
+	
 	@Override
 	public String toString() {
-		return getId() + " : " + getNumero_carte() + " " + getCode_confidentiel() + " - " + getBanque();
+		return getId() + " : " + getNumero_carte() + " " + getCode_confidentiel() + " - " + getBanque() + " - " + getClient().getNom() + " " + getClient().getPrenom();
 	}
     
     

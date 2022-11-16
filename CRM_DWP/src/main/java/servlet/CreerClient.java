@@ -62,6 +62,7 @@ public class CreerClient extends HttpServlet {
 			} else {
 				erreurs.put("prenomClient", "Merci d'entrer un prénom.");
 			}
+		}
 		
 		if(telephone != null) {
 			if(telephone.length() > 10) {
@@ -97,12 +98,7 @@ public class CreerClient extends HttpServlet {
 		client.setNom_societe(nomsociete);
 		client.setGenre(genre);
 		client.setEtat(etat);
-<<<<<<< HEAD
-		client.setAdresse(AdresseDao.trouver(idAdresse));
-=======
 		client.setAdresse(adresseDao.trouver(idAdresse));
->>>>>>> antoine
-		
 		
 		if(erreurs.isEmpty()) {
 			try {
@@ -120,5 +116,4 @@ public class CreerClient extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/creerClient.jsp").forward(request, response);
 		}	
 	}
-
 }

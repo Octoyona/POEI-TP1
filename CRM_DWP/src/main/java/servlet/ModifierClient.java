@@ -11,33 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ClientDao;
-<<<<<<< HEAD
-=======
 import dao.AdresseDao;
->>>>>>> antoine
 import dao.DaoException;
 import dao.DaoFactory;
 import model.Client;
 
-/**
- * Servlet implementation class ModifierClient
- */
 @WebServlet("/modifierClient")
 public class ModifierClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ModifierClient() {
-        super();
-<<<<<<< HEAD
-        clientDao = DaoFactory.getInstance().getClientDao();
-=======
-        ClientDao clientDao = DaoFactory.getInstance().getClientDao();
->>>>>>> antoine
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
@@ -51,10 +33,6 @@ public class ModifierClient extends HttpServlet {
 		this.getServletContext().getRequestDispatcher("/WEB-INF/modifierClient.jsp").forward(request, response);
 	}
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> erreurs = new HashMap<String, String>();
 		
@@ -127,11 +105,9 @@ public class ModifierClient extends HttpServlet {
 		client.setTelephone(telephone);
 		client.setMail(mail);
 		client.setNom_societe(nomsociete);
-<<<<<<< HEAD
-		client.setAdresse(AdresseDao.trouver(idAdresse)); 
-=======
-		client.setAdresses(adresseDao.trouver(idAdresse));
->>>>>>> antoine
+		
+		client.setAdresse(adresseDao.trouver(idAdresse));
+
 		client.setGenre(genre);
 		client.setEtat(etat);
 		
@@ -153,5 +129,4 @@ public class ModifierClient extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/modifierClient.jsp").forward(request, response);
 		}	
 	}
-
 }
