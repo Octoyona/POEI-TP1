@@ -1,8 +1,6 @@
 package dao;
 
 import java.util.List;
-
-import dao.DaoException;
 import model.Produit;
 
 public interface ProduitDao {

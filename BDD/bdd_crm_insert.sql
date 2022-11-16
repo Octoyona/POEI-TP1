@@ -1,4 +1,4 @@
-INSERT INTO produits(nom, decription,prix) VALUES 
+INSERT INTO produits(nom, description,prix) VALUES 
 ('ecran', "ceci est un ecran pour ordinateur", 259.99),
 ('souris', "ceci est une souris pour ordinateur", 42),
 ('clavier', "ceci est un clavier pour ordinateur", 82.50),
