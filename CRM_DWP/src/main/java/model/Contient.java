@@ -2,22 +2,20 @@ package model;
 
 public class Contient {
 	private Long   id;
-    private Panier paniers;
-    private Produit produits;
+    private Panier panier;
+    private Produit produit;
     private int quantité;
     
     //Constructeurs
-	public Contient(Panier paniers, Produit produits, int quantité) {
-		this.paniers = paniers;
-		this.produits = produits;
+	public Contient(Panier panier, Produit produit, int quantité) {
+		this.panier = panier;
+		this.produit = produit;
 		this.quantité = quantité;
 	}
 	
 	public Contient() {		
 	}
 
-	
-    
 	//Getters & setters
 	public Long getId() {
 		return id;
@@ -27,20 +25,20 @@ public class Contient {
 		this.id = id;
 	}
 
-	public Panier getPaniers() {
-		return paniers;
+	public Panier getPanier() {
+		return panier;
 	}
 
-	public void setPaniers(Panier paniers) {
-		this.paniers = paniers;
+	public void setPanier(Panier panier) {
+		this.panier = panier;
 	}
 
-	public Produit getProduits() {
-		return produits;
+	public Produit getProduit() {
+		return produit;
 	}
 
-	public void setProduits(Produit produits) {
-		this.produits = produits;
+	public void setProduit(Produit produit) {
+		this.produit = produit;
 	}
 
 	public int getQuantité() {
@@ -53,7 +51,7 @@ public class Contient {
 	
 	@Override
 	public String toString() {
-		return getId() + " : " + getPaniers() + " : " + getProduits() + " : " + getQuantité();
+		return getId() + " : " + getPanier() + " : " + getProduit() + " : " + getQuantité();
 	}
     
   
