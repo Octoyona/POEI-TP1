@@ -1,7 +1,7 @@
 CREATE TABLE produits (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
-    decription TEXT,
+    description TEXT,
     prix FLOAT UNSIGNED
 );
 
