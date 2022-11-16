@@ -7,10 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.DaoException;
+import dao.DaoFactory;
+import dao.PanierDao;
+import dao.ProduitDao;
+import model.Contient;
+import model.Produit;
 /**
  * Servlet implementation class ChoixProduit
  */
-@WebServlet("/ChoixProduit")
+@WebServlet("/choixProduit")
 public class ChoixProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,13 +53,13 @@ public class ChoixProduit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		int idProduitChoisi;
-		int idClient;
+		Long idProduitChoisi;
+		Long idClient;
 		int quantite;
 		
 		try {
-		idProduitChoisi = Integer.parseInt(request.getParameter("idProduitChoisi"));
-		idClient =  Integer.parseInt(request.getParameter("idClient"));
+		idProduitChoisi = Long.parseLong(request.getParameter("idProduitChoisi"));
+		idClient =  Long.parseLong(request.getParameter("idClient"));
 		quantite = Integer.parseInt(request.getParameter("quantite"));
 		
 		} catch (NumberFormatException e) {
@@ -64,9 +70,9 @@ public class ChoixProduit extends HttpServlet {
 		ProduitDao produitDao = DaoFactory.getInstance().getProduitDao();
 		Produit produitChoisi = produitDao.trouver(idProduitChoisi);	
 		PanierDao panierDao = DaoFactory.getInstance().getPanierDao();
-		int idPanier = panierDao.trouver(idClient).getId();
+		Long idPanier = panierDao.trouver(idClient).getId();
 		ContientDao contientDao = DaoFactory.getInstance().getContientDao();
-		Contient contient = new Contient(idProduitChoisi, idPanier, quantite);
+		Contient contient = new Contient(produitChoisi, idPanier, quantite);
 		contientDao.creer(contient);
 				
 	}
