@@ -6,6 +6,7 @@ public class Paiement {
     private String numero_carte;
     private String code_confidentiel;
     private String banque;
+    private Client client;
     
   //Constructeur
     
@@ -50,6 +51,15 @@ public class Paiement {
 
 	public void setBanque(String banque) {
 		this.banque = banque;
+	}
+	
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@Override
