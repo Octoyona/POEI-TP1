@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import servlet.AdresseDao;
+
 public class DaoFactory {
 
 	private String url;
@@ -54,6 +56,18 @@ public class DaoFactory {
 		return new ProduitDaoImpl( this );
 	}
 	
+	public PanierDao getPanierDao() {
+		return new PanierDaoImpl( this );
+	}
+	
+	public PaiementDao getPaiementDao() {
+		return new PaiementDaoImpl( this );
+	}
+	
+	public AdresseDao getAdresseDao() {
+		return new AdresseDaoImpl( this );
+	}
+	
 	//Pourquoi on doit faire un throws SQL exception ?
 	Connection getConnection() throws SQLException {
 		if(this.con == null) {
@@ -75,6 +89,4 @@ public class DaoFactory {
 			this.con = null;
 		}
 	}
-	
-	
 }
