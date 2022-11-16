@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoException;
 import dao.DaoFactory;
+import model.Adresse;
 import model.Client;
 import dao.ClientDao;
 import dao.AdresseDao;
@@ -35,7 +36,7 @@ public class CreerClient extends HttpServlet {
 		
 		Map<String, String> erreurs = new HashMap<String, String>();
 		
-		AdresseDao adresseDao = DaoFactory.getInstance().getClientDao();
+		AdresseDao adresseDao = DaoFactory.getInstance().getAdresseDao();
 		
 		String nom = request.getParameter("nomClient");
 		String prenom = request.getParameter("prenomClient");
@@ -62,6 +63,7 @@ public class CreerClient extends HttpServlet {
 			} else {
 				erreurs.put("prenomClient", "Merci d'entrer un prénom.");
 			}
+		}
 		
 		if(telephone != null) {
 			if(telephone.length() > 10) {
@@ -97,11 +99,15 @@ public class CreerClient extends HttpServlet {
 		client.setNom_societe(nomsociete);
 		client.setGenre(genre);
 		client.setEtat(etat);
-<<<<<<< HEAD
-		client.setAdresse(AdresseDao.trouver(idAdresse));
-=======
-		client.setAdresse(adresseDao.trouver(idAdresse));
->>>>>>> antoine
+		
+		try {
+			Adresse adresse = adresseDao.trouver(idAdresse);
+			client.setAdresse(adresse);
+		} catch(DaoException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		
 		if(erreurs.isEmpty()) {
@@ -120,5 +126,4 @@ public class CreerClient extends HttpServlet {
 			this.getServletContext().getRequestDispatcher("/WEB-INF/creerClient.jsp").forward(request, response);
 		}	
 	}
-
 }

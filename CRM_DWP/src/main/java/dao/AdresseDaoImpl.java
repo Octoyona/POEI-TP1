@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Adresse;
-import model.Paiement;
 
 public class AdresseDaoImpl implements AdresseDao{
 	private static final String SQL_INSERT       = "INSERT INTO adresses(rue, ville, code_postal, pays) VALUES(?,?,?,?)";

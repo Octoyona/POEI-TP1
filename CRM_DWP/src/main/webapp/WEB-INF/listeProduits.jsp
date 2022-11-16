@@ -11,7 +11,7 @@
 	<c:import url="/WEB-INF/menu.jsp"/>
 	<c:choose>
 		<c:when test="${ empty produits }">
-			Aucun produit trouvés
+			Aucun produit trouvé
 		</c:when>
 		<c:otherwise>
 			<table>

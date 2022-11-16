@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Contient;
-import model.Paiement;
-import model.Panier;
 
 public class ContientDaoImpl implements ContientDao {
 
@@ -35,8 +33,8 @@ public class ContientDaoImpl implements ContientDao {
 			con = factory.getConnection();
 			
 			PreparedStatement pst = con.prepareStatement( SQL_INSERT, Statement.RETURN_GENERATED_KEYS );
-			pst.setLong( 1, contient.getPaniers().getId());
-			pst.setLong( 2, contient.getProduits().getId());
+			pst.setLong( 1, contient.getPanier().getId());
+			pst.setLong( 2, contient.getProduit().getId());
 			pst.setInt( 3,contient.getQuantité());
 						
 			int statut = pst.executeUpdate();
@@ -136,8 +134,8 @@ public class ContientDaoImpl implements ContientDao {
 			con = factory.getConnection();
 			
 			PreparedStatement pst = con.prepareStatement( SQL_UPDATE );
-			pst.setLong(1, contient.getPaniers().getId());
-			pst.setLong(2, contient.getProduits().getId());
+			pst.setLong(1, contient.getPanier().getId());
+			pst.setLong(2, contient.getProduit().getId());
 			pst.setInt(3, contient.getQuantité());
 			pst.setLong(4, contient.getId());	
 			
@@ -164,15 +162,15 @@ public class ContientDaoImpl implements ContientDao {
 		
 		PanierDao panierDao = DaoFactory.getInstance().getPanierDao();
 		try {
-			c.setPaniers(panierDao.trouver(resultSet.getLong("id_panier")));
+			c.setPanier(panierDao.trouver(resultSet.getLong("id_panier")));
 		} catch(DaoException e) {
 			e.printStackTrace();
 		}
 		
 		
-		ProduiDao produitDao = DaoFactory.getInstance().getProduitDao();
+		ProduitDao produitDao = DaoFactory.getInstance().getProduitDao();
 		try {
-			c.setProduits(produitDao.trouver(resultSet.getLong("id_produit")));
+			c.setProduit(produitDao.trouver(resultSet.getLong("id_produit")));
 		} catch(DaoException e) {
 			e.printStackTrace();
 		}
