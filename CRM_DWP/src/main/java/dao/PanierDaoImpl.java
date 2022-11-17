@@ -14,7 +14,7 @@ public class PanierDaoImpl implements PanierDao{
 
 	private static final String SQL_INSERT       = "INSERT INTO panier(id_client) VALUES(?)";
 	private static final String SQL_SELECT       = "SELECT id, id_client FROM panier";
-    private static final String SQL_SELECT_BY_ID = "SELECT id_client FROM panier WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id, id_client FROM panier WHERE id = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM panier WHERE id = ? ";
 	private static final String SQL_UPDATE 		 = "UPDATE panier SET id_client = ? WHERE id = ?";
 	

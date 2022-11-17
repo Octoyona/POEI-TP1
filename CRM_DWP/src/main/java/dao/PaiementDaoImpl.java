@@ -15,7 +15,7 @@ public class PaiementDaoImpl implements PaiementDao {
 
 	private static final String SQL_INSERT       = "INSERT INTO paiement(numero_carte, code_confidentiel, banque, id_client) VALUES(?,?,?,?)";
 	private static final String SQL_SELECT       = "SELECT id, numero_carte, code_confidentiel, banque, id_client FROM paiement";
-    private static final String SQL_SELECT_BY_ID = "SELECT numero_carte, code_confidentiel, banque, id_client FROM paiement WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id, numero_carte, code_confidentiel, banque, id_client FROM paiement WHERE id = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM paiement WHERE id = ? ";
 	private static final String SQL_UPDATE 		 = "UPDATE paiement SET numero_carte = ?, code_confidentiel = ?, banque = ?, id_client = ?  WHERE id = ?";
 	

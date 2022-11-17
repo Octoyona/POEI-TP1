@@ -13,7 +13,7 @@ import model.Adresse;
 public class AdresseDaoImpl implements AdresseDao{
 	private static final String SQL_INSERT       = "INSERT INTO adresses(rue, ville, code_postal, pays) VALUES(?,?,?,?)";
 	private static final String SQL_SELECT       = "SELECT id, rue, ville, code_postal, pays FROM adresses";
-    private static final String SQL_SELECT_BY_ID = "SELECT rue, ville, code_postal, pays FROM adresses WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id, rue, ville, code_postal, pays FROM adresses WHERE id = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM adresses WHERE id = ? ";
 	private static final String SQL_UPDATE 		 = "UPDATE adresses SET rue = ?, ville = ?, code_postal = ?, pays = ?  WHERE id = ?";
 	
