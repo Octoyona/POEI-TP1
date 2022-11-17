@@ -53,12 +53,19 @@
 								<td><c:out value="${ contient.prixTotal}" /></td>
 								<td>
 <<<<<<< HEAD
+<<<<<<< HEAD
 									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le dï¿½tail du produit</a>	
 								</td>
 								<td>
 									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantitï¿½</a>
 								</td>
 								<td>
+=======
+									<a href="<c:url value="/detailsProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le d�tail du produit</a>	
+
+									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantit�</a>
+
+>>>>>>> 01112f8adf73f94f807b2a2e5fe498ddea3778cc
 									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Supprimer du panier</a>
 								</td>
 							</tr>
