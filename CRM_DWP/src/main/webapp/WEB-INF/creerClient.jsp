@@ -25,54 +25,54 @@
 			<div>
 				<label class="form-label" for="nomClient">Nom* :</label> <input class=""
 					type="text" id="nomClient" name="nomClient"
-					value="<c:out value="${ client.nom }" />" /> <span class="erreur">${ erreurs.nom }</span>
+					value="<c:out value="${ client.nom }" />" /> <span class="erreur">${ erreurs.nomClient }</span>
 			</div>
 			<div>
 				<label class="form-label" for="prenomClient">Prénom* :</label> <input
 					class="" type="text" id="prenomClient" name="prenomClient"
 					value="<c:out value="${ client.prenom }" />" /> <span
-					class="erreur">${ erreurs.prenom }</span>
+					class="erreur">${ erreurs.prenomClient }</span>
 			</div>
 			<div>
 				<label class="form-label" for="telephoneClient">Téléphone :</label> <input
 					class="" type="text" id="telephoneClient" name="telephoneClient"
 					value="<c:out value="${ client.telephone }" />" /> <span
-					class="erreur">${ erreurs.telephone }</span>
+					class="erreur">${ erreurs.telephoneClient }</span>
 			</div>
 			<div>
 				<label class="form-label" for="rueAdresse">Rue :</label> <input
 					class="" type="text" id="rueAdresse" name="rueAdresse"
 					value="<c:out value="${ client.adresse.rue }" />" /> <span
-					class="erreur">${ erreurs.rue }</span>
+					class="erreur">${ erreurs.rueAdresse }</span>
 			</div>
 			<div>
 				<label class="form-label" for="codePostalAdresse">Code Postal :</label> <input
 					class="" type="text" id="codePostalAdresse" name="codePostalAdresse"
-					value="<c:out value="${ client.adresse.codePostal }" />" /> <span
-					class="erreur">${ erreurs.codePostal }</span>
+					value="<c:out value="${ client.adresse.code_postal }" />" /> <span
+					class="erreur">${ erreurs.codePostalAdresse }</span>
 			</div>
 			<div>
 				<label class="form-label" for="villeAdresse">Ville :</label> <input
 					class="" type="text" id="villeAdresse" name="villeAdresse"
 					value="<c:out value="${ client.adresse.ville }" />" /> <span
-					class="erreur">${ erreurs.ville }</span>
+					class="erreur">${ erreurs.villeAdresse }</span>
 			</div>
 			<div>
 				<label class="form-label" for="paysAdresse">Pays :</label> <input
 					class="" type="text" id="paysAdresse" name="paysAdresse"
 					value="<c:out value="${ client.adresse.pays }" />" /> <span
-					class="erreur">${ erreurs.pays }</span>
+					class="erreur">${ erreurs.paysAdresse }</span>
 			</div>
 			<div>
 				<label class="form-label" for="mailClient">Mail* :</label> <input
 					class="" type="text" id="mailClient" name="mailClient"
-					value="<c:out value="${ client.mail }" />" /> <span class="erreur">${ erreurs.mail }</span>
+					value="<c:out value="${ client.mail }" />" /> <span class="erreur">${ erreurs.mailClient }</span>
 			</div>
 			<div>
 				<label class="form-label" for="nomSociete">Société :</label> <input
 					class="" type="text" id="nomSociete" name="nomSociete"
-					value="<c:out value="${ client.nomsociete }" />" /> <span
-					class="erreur">${ erreurs.nomSociete }</span>
+					value="<c:out value="${ client.nom_societe }" />" /> <span
+					class="erreur">${ erreurs.nom_societeClient }</span>
 			</div>
 
 			<input type="submit" value="Envoyer" class="sansLabel" /> <input
