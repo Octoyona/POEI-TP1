@@ -9,6 +9,7 @@ import dao.DaoException;
 import dao.DaoFactory;
 import model.Adresse;
 import model.Client;
+import dao.AdresseDao;
 import dao.ClientDao;
 
 public class ClientForm {
@@ -125,14 +126,21 @@ public class ClientForm {
 		client.setMail(mail);
 		client.setNom_societe(nomsociete);
 		client.setGenre(genre);
-		
 		client.setAdresse(adresse);
-				
-		if(isValid()) {
-			System.out.println("isValidClientForm");
+
+		if(isValid() && adresseForm.isValid()) {
 			try {
-				if(this.choix==CREATION) this.clientDao.creer(client);
-				else if (this.choix==MODIFICATION) this.clientDao.update(client);
+				AdresseDao adresseDao = DaoFactory.getInstance().getAdresseDao();
+				
+				if(this.choix==CREATION) {
+					long idAdresse = adresseDao.creer(adresse);
+					adresse.setId(idAdresse);
+					this.clientDao.creer(client);
+				}
+				else if (this.choix==MODIFICATION) {
+					this.clientDao.update(client);
+					adresseDao.update(adresse);
+				}
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}
