@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Détail du panier client</title>
+<title>DÃ©tail du panier client</title>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/inc/style.css" />" />
 </head>
@@ -17,18 +17,21 @@
 		
 		<c:choose>
 			<c:when test="${ empty panier }">
-				<p>Aucun produit dans votre panier! N'hésitez pas à en rajouter ;)...</p>
+				<p>Aucun produit dans votre panier! N'hÃ©sitez pas Ã  en rajouter ;)...</p>
 					<a href="<c:url value="/listeProduits" />"><button>Ajouter un produit</button></a>
 			</c:when>
 			<c:otherwise>	
-				<table>
+				<table class="table table-bordered">
 					<thead>
 						<tr>
 								<th>Produit</th>
 								<th>Description</th>
 								<th>Prix</th>
-								<th>Quantité</th>
+								<th>QuantitÃ©</th>
 								<th>Total</th>
+								<th>Details produit</th>
+								<th>Modifier quantitÃ©</th>
+								<th>Supprimer</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,10 +43,12 @@
 								<td><c:out value="${ contient.quantite}" /></td>
 								<td><c:out value="${ contient.prixTotal}" /></td>
 								<td>
-									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le détail du produit</a>	
-
-									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantité</a>
-
+									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le dÃ¯Â¿Â½tail du produit</a>	
+								</td>
+								<td>
+									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantitÃ¯Â¿Â½</a>
+								</td>
+								<td>
 									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Supprimer du panier</a>
 								</td>
 							</tr>

@@ -42,9 +42,9 @@ public class AdresseForm {
 
 	public boolean isValid() {
 		if(erreurs.isEmpty()) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -83,19 +83,6 @@ public class AdresseForm {
 		adresse.setCode_postal(codePostal);
 		adresse.setVille(ville);
 		adresse.setPays(pays);
-			
-		if(isValid()) {
-			try {
-				if(this.choix==CREATION) {
-					idAdresse = this.adresseDao.creer(adresse);
-					adresse.setId(idAdresse);
-					System.out.println(idAdresse);
-				}
-				else if (this.choix==MODIFICATION) this.adresseDao.update(adresse);
-			} catch (DaoException e) {
-				e.printStackTrace();
-			}
-		}
 		
     	return adresse;
     }

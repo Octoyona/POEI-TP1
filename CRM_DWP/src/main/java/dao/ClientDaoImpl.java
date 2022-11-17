@@ -60,7 +60,6 @@ public class ClientDaoImpl implements ClientDao {
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
-		
 	}
 	
 	
