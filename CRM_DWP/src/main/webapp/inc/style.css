@@ -81,6 +81,19 @@ button a:hover {
 	border-collapse: collapse;
 }
 
+.view {
+	position : relative;
+	width : 40% !important;
+	margin : auto !important;
+	left : 10%;
+
+}
+
+.view select {
+	width : 37%;
+	margin-bottom : 2rem;
+}
+
 .view td {
 	border: 1px solid;
 	padding: 5px;
@@ -98,6 +111,7 @@ button a:hover {
 .view .impair {
 	background-color:#d9d9d9;
 }
+
 
 .erreur {
 	color:red;
