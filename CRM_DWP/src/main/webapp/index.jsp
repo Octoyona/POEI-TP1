@@ -10,5 +10,8 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/menu.jsp"/>
+	
+	
+	
 </body>
 </html>
