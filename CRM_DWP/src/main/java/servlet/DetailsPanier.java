@@ -27,7 +27,7 @@ public class DetailsPanier extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			long idClient = Long.parseLong(request.getParameter("id"));		
+			long idClient = Long.parseLong(request.getParameter("id"));
 			
 			request.setAttribute("panier", panierDao.trouverClient(idClient));
 		} catch(DaoException e) {

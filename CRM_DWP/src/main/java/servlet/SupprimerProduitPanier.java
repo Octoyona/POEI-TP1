@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ContientDao;
 import dao.DaoException;
 import dao.DaoFactory;
-import dao.ProduitDao;
 
 @WebServlet("/supprimerProduit")
 public class SupprimerProduitPanier extends HttpServlet {
@@ -27,7 +26,7 @@ public class SupprimerProduitPanier extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		try {
-			long id = Long.parseLong(request.getParameter("id"));
+			long id = Long.parseLong(request.getParameter("idClient"));
 			contientDao.supprimer(id);
 			
 			//Ajout d'un élément dans la session

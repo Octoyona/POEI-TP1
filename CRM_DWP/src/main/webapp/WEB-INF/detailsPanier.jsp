@@ -13,12 +13,13 @@
 	<c:import url="/WEB-INF/menu.jsp" />
 
 	<div class="view">
-
-		
 		<c:choose>
 			<c:when test="${ empty panier }">
 				<p>Aucun produit dans votre panier! N'hésitez pas à en rajouter ;)...</p>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/dev
 					<a href="<c:url value="/listeProduits" />"><button>Ajouter un produit</button></a>
 			</c:when>
 			<c:otherwise>	
@@ -31,7 +32,7 @@
 								<th>Quantité</th>
 								<th>Total</th>
 								<th>Details produit</th>
-								<th>Modifier quantité</th>
+								<!-- <th>Modifier quantité</th> -->
 								<th>Supprimer</th>
 						</tr>
 					</thead>
@@ -44,6 +45,7 @@
 								<td><c:out value="${ contient.quantite}" /></td>
 								<td><c:out value="${ contient.prixTotal}" /></td>
 								<td>
+<<<<<<< HEAD
 
 									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le dï¿½tail du produit</a>	
 								</td>
@@ -56,6 +58,13 @@
 
 
 									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Supprimer du panier</a>
+=======
+									<a href="<c:url value="/detailsProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le détail du produit</a>	
+
+									<!--  <a href="<c:url value="/modifierProduit?idClient=1"><c:param name="id" value="${ contient.id}" /></c:url>">Modifier la quantité</a>-->
+
+									<a href="<c:url value="/supprimerProduit?idClient=1"><c:param name="id" value="${ contient.id}" /></c:url>">Supprimer du panier</a>
+>>>>>>> origin/dev
 								</td>
 							</tr>
 						</c:forEach>
