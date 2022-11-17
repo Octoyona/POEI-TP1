@@ -76,6 +76,10 @@ public class ContientForm {
 				erreurs.put("quantiteProduit", "Vous êtes trop gourmand, trop grande quantité");
 			} else if (quantite<0){
 				erreurs.put("quantiteProduit", "Ce serait bien d'ajouter au moins 1 produit");
+			} else if (quantite==0){
+				//contientDao.supprimer(produit.getId());
+				erreurs.put("quantiteProduit", "Ce serait bien d'ajouter au moins 1 produit");
+			
 			}else {
 				contient.setQuantite(quantite);
 			}

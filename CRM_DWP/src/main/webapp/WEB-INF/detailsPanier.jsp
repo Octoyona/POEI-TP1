@@ -6,6 +6,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Détail du panier client</title>
+=======
+<title>D�tail du panier client</title>
+>>>>>>> origin/marina
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/inc/style.css" />" />
 </head>
@@ -18,6 +21,9 @@
 		<c:choose>
 			<c:when test="${ empty panier }">
 				<p>Aucun produit dans votre panier! N'hésitez pas à en rajouter ;)...</p>
+=======
+				<p>Aucun produit dans votre panier! N'h�sitez pas � en rajouter ;)...</p>
+>>>>>>> origin/marina
 					<a href="<c:url value="/listeProduits" />"><button>Ajouter un produit</button></a>
 			</c:when>
 			<c:otherwise>	
@@ -28,6 +34,9 @@
 								<th>Description</th>
 								<th>Prix</th>
 								<th>Quantité</th>
+=======
+								<th>Quantit�</th>
+>>>>>>> origin/marina
 								<th>Total</th>
 								<th>Details produit</th>
 								<th>Modifier quantité</th>
@@ -43,6 +52,7 @@
 								<td><c:out value="${ contient.quantite}" /></td>
 								<td><c:out value="${ contient.prixTotal}" /></td>
 								<td>
+<<<<<<< HEAD
 									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le dï¿½tail du produit</a>	
 								</td>
 								<td>
@@ -62,7 +72,7 @@
 			</c:otherwise>
 		</c:choose>
 		<form method="POST"
-			action="<c:url value="/paiement"><c:param name="id" value="${ panier.id }" /></c:url>">
+			action="<c:url value="/paiementPanier"><c:param name="id" value="${ panier.id }" /></c:url>">
 			<input type="submit" value="Payer" class="sansLabel" /> <input>
 			
 		</form>
