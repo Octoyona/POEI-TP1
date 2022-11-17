@@ -28,8 +28,6 @@ public class ListeProduit extends HttpServlet {
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
-
-		System.err.println("test");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/listeProduits.jsp").forward(request, response);
 
 	}
