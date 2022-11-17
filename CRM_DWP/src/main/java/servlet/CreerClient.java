@@ -22,9 +22,7 @@ public class CreerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private ClientDao clientDao;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public CreerClient() {
         super();
         clientDao = DaoFactory.getInstance().getClientDao();
@@ -109,9 +107,6 @@ public class CreerClient extends HttpServlet {
 		} catch(DaoException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 		if(erreurs.isEmpty()) {
 			try {
