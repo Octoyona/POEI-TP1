@@ -41,9 +41,9 @@ public class ClientForm {
 
 	public boolean isValid() {
 		if(erreurs.isEmpty()) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -84,9 +84,9 @@ public class ClientForm {
 		if(prenom != null) {
 			if(prenom.length() > 20) {
 				erreurs.put("prenomClient", "Votre prénom doit avoir maximum 20 caractères.");
-			} else {
-				erreurs.put("prenomClient", "Merci d'entrer un prénom.");
-			}
+			} 
+		} else {
+			erreurs.put("prenomClient", "Merci d'entrer un prénom.");
 		}
 		
 		if(telephone != null) {
@@ -102,8 +102,10 @@ public class ClientForm {
 		
 		if(nomsociete != null) {
 			if(nomsociete.length() > 20) {
-				erreurs.put("nomSociete", "Le nom de votre société doit avoir maximum 20 caractères.");
+				erreurs.put("nomSocieteClient", "Le nom de votre société doit avoir maximum 20 caractères.");
 			}
+		} else {
+			erreurs.put("nomSocieteClient", "Merci d'entrer un nom de société.");
 		}
 			
 		if(mail != null) {
@@ -113,6 +115,8 @@ public class ClientForm {
 			if(!mail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 				erreurs.put("mailClient", "Merci d'entrer une adresse mail valide.");
 			}
+		} else {
+			erreurs.put("mailClient", "Merci d'entrer un email.");
 		}
 		
 		client.setNom(nom);
@@ -125,6 +129,7 @@ public class ClientForm {
 		client.setAdresse(adresse);
 				
 		if(isValid()) {
+			System.out.println("isValidClientForm");
 			try {
 				if(this.choix==CREATION) this.clientDao.creer(client);
 				else if (this.choix==MODIFICATION) this.clientDao.update(client);

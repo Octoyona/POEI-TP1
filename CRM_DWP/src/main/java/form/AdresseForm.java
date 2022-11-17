@@ -42,9 +42,9 @@ public class AdresseForm {
 
 	public boolean isValid() {
 		if(erreurs.isEmpty()) {
-			return false;
-		} else {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
