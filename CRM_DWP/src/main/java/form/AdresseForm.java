@@ -47,7 +47,6 @@ public class AdresseForm {
 			return true;
 		}
 	}
-	
 
 	public Adresse saveAdresse(HttpServletRequest request, int choix) {
        		
@@ -58,11 +57,11 @@ public class AdresseForm {
 
 		long idAdresse;
 		Adresse adresse = new Adresse();
-		
+			
 		if(this.choix==MODIFICATION) {
 			idAdresse = Long.parseLong(request.getParameter("id"));
 			try {
-				adresse = adresseDao.trouver(idAdresse);
+				adresse = this.adresseDao.trouver(idAdresse);
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}
@@ -80,7 +79,6 @@ public class AdresseForm {
 				erreurs.put("codePostalAdresse", "Code Postal invalide");
 			}
 		}
-		
 		adresse.setRue(rue);
 		adresse.setCode_postal(codePostal);
 		adresse.setVille(ville);
@@ -88,7 +86,11 @@ public class AdresseForm {
 			
 		if(isValid()) {
 			try {
-				if(this.choix==CREATION) this.adresseDao.creer(adresse);
+				if(this.choix==CREATION) {
+					idAdresse = this.adresseDao.creer(adresse);
+					adresse.setId(idAdresse);
+					System.out.println(idAdresse);
+				}
 				else if (this.choix==MODIFICATION) this.adresseDao.update(adresse);
 			} catch (DaoException e) {
 				e.printStackTrace();
