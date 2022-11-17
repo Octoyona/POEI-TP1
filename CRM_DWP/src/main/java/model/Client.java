@@ -8,7 +8,7 @@ public class Client {
     private String nom_societe;
     private String mail;
     private String telephone;
-    private int etat;
+    private int etat=0;
     private int genre;
     
      //Constructeur

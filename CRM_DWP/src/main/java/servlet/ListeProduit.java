@@ -10,10 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.ContientDao;
 import dao.DaoException;
 import dao.DaoFactory;
-import dao.PanierDao;
 import dao.ProduitDao;
 import model.Contient;
-import model.Panier;
 import model.Produit;
 
 @WebServlet("/listeProduits")
@@ -28,8 +26,6 @@ public class ListeProduit extends HttpServlet {
 		} catch (DaoException e) {
 			e.printStackTrace();
 		}
-
-		System.err.println("test");
 		this.getServletContext().getRequestDispatcher("/WEB-INF/listeProduits.jsp").forward(request, response);
 
 	}
@@ -37,20 +33,18 @@ public class ListeProduit extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Long idProduitChoisi;
-		Long idClient;
 		int quantite;
+		long idPanier;
 		
 		try {
 			idProduitChoisi = Long.parseLong(request.getParameter("idProduitChoisi"));
-			idClient =  Long.parseLong(request.getParameter("idClient"));
 			quantite = Integer.parseInt(request.getParameter("quantite"));
+			idPanier = Long.parseLong(request.getParameter("idPanier"));
 			ProduitDao produitDao = DaoFactory.getInstance().getProduitDao();
 			Produit produitChoisi = produitDao.trouver(idProduitChoisi);	
-			PanierDao panierDao = DaoFactory.getInstance().getPanierDao();
-			Panier panier = panierDao.trouver(idClient);
 			ContientDao contientDao = DaoFactory.getInstance().getContientDao();
-			Contient contient = new Contient(panier, produitChoisi, quantite);
-			contientDao.creer(contient);
+			Contient contient = new Contient(produitChoisi, quantite);
+			contientDao.creer(contient, idPanier);
 		} catch (DaoException | NumberFormatException e) {
 			e.printStackTrace();
 		}

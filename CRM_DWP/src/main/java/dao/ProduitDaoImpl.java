@@ -14,7 +14,7 @@ public class ProduitDaoImpl implements ProduitDao {
 
 	private static final String SQL_INSERT			= "INSERT INTO produits(nom, description, prix) VALUES(?,?,?)";
 	private static final String SQL_SELECT			= "SELECT id,nom,description,prix FROM produits";
-	private static final String SQL_SELECT_BY_ID	= "SELECT nom,description,prix FROM produits WHERE id = ?";
+	private static final String SQL_SELECT_BY_ID	= "SELECT id,nom,description,prix FROM produits WHERE id =?";
 	private static final String SQL_DELETE_BY_ID	= "DELETE FROM produits WHERE id = ?";
 	private static final String SQL_UPDATE			= "UPDATE produits SET nom=?, description=?, prix=? WHERE id=?";
 			
@@ -136,7 +136,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			  }
 		      ps.close();
 	    } catch(SQLException e) {
-	    	throw new DaoException("Erreur de suppression BDD Porduit", e);
+	    	throw new DaoException("Erreur de suppression BDD Produit", e);
 	    } finally {
 	    	factory.releaseConnection(con);
 		}

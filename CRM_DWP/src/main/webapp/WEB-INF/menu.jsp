@@ -13,7 +13,8 @@
 		<ul>
 			<li id="boutonAccueil"><a href="<c:url value='/'/>">Accueil</a></li>
 			<li id="boutonProduits"><a href="<c:url value='/listeProduits'/>">Produits</a></li>
-			<li id="boutonPanier"><a href="<c:url value='/panier'/>">Mon panier</a></li>
+			<li id="boutonPanier"><a href="<c:url value='/detailsPanier?id=1'/>">Mon panier</a></li> <!-- id provisoire !!!!! -->
+			<li id="s'inscrire"><a href="<c:url value='/creerClient'/>">S'inscrire</a></li>
 		</ul>
 	</div>
 </body>

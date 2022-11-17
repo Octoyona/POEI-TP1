@@ -13,7 +13,7 @@ import model.Adresse;
 public class AdresseDaoImpl implements AdresseDao{
 	private static final String SQL_INSERT       = "INSERT INTO adresses(rue, ville, code_postal, pays) VALUES(?,?,?,?)";
 	private static final String SQL_SELECT       = "SELECT id, rue, ville, code_postal, pays FROM adresses";
-    private static final String SQL_SELECT_BY_ID = "SELECT rue, ville, code_postal, pays FROM adresses WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id, rue, ville, code_postal, pays FROM adresses WHERE id = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM adresses WHERE id = ? ";
 	private static final String SQL_UPDATE 		 = "UPDATE adresses SET rue = ?, ville = ?, code_postal = ?, pays = ?  WHERE id = ?";
 	
@@ -24,9 +24,9 @@ public class AdresseDaoImpl implements AdresseDao{
 	}
 
 	@Override
-	public void creer(Adresse adresse) throws DaoException {
+	public long creer(Adresse adresse) throws DaoException {
 		Connection con = null;
-		
+		long idAdresse=-1;
 		try {
 			con = factory.getConnection();
 			
@@ -35,15 +35,17 @@ public class AdresseDaoImpl implements AdresseDao{
 			pst.setString( 2, adresse.getVille());
 			pst.setString( 3, adresse.getCode_postal());
 			pst.setString( 4, adresse.getPays());
-						
+
 			int statut = pst.executeUpdate();
 
             if ( statut == 0 ) {
                 throw new DaoException( "Echec création Adresse (aucun ajout)" );
             }
             ResultSet rsKeys = pst.getGeneratedKeys();
+
             if ( rsKeys.next() ) {
-                adresse.setId( rsKeys.getLong( 1 ) );
+            	idAdresse = rsKeys.getInt(1);
+                adresse.setId(idAdresse);
             } else {
                 throw new DaoException( "Echec création Adresse (ID non retourné)" );
             }
@@ -55,6 +57,7 @@ public class AdresseDaoImpl implements AdresseDao{
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
+		return idAdresse;
 	}
 
 	@Override

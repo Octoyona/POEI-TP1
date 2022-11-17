@@ -18,29 +18,23 @@ import dao.ProduitDao;
 public class DetailsProduit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private ProduitDao produitDao;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DetailsProduit() {
-        super();
-        produitDao = DaoFactory.getInstance().getProduitDao();
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		ProduitDao produitDao = DaoFactory.getInstance().getProduitDao();
+
+		String id = request.getParameter("id");
+
 		try {
-			long id = Long.parseLong(request.getParameter("id"));
-			request.setAttribute("client", produitDao.trouver(id));
+			Long num = Long.parseLong(id);
+			request.setAttribute("produit", produitDao.trouver(num));
 		} catch (DaoException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.getServletContext().getRequestDispatcher("/WEB-INF/detailsProduit.jsp").forward(request, response);
-	}
 
+		this.getServletContext().getRequestDispatcher("/WEB-INF/detailsProduit.jsp").forward(request, response);
+
+	}
 
 }
