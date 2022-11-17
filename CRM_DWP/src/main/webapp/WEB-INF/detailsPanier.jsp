@@ -42,9 +42,9 @@
 								<td>
 									<a href="<c:url value="/detailsProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le d�tail du produit</a>	
 
-									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantit�</a>
+									<a href="<c:url value="/modifierProduit?idClient=1"><c:param name="id" value="${ contient.id}" /></c:url>">Modifier la quantit�</a>
 
-									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Supprimer du panier</a>
+									<a href="<c:url value="/supprimerProduit?idClient=1"><c:param name="id" value="${ contient.id}" /></c:url>">Supprimer du panier</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -57,7 +57,7 @@
 			</c:otherwise>
 		</c:choose>
 		<form method="POST"
-			action="<c:url value="/paiement"><c:param name="id" value="${ panier.id }" /></c:url>">
+			action="<c:url value="/paiementPanier"><c:param name="id" value="${ panier.id }" /></c:url>">
 			<input type="submit" value="Payer" class="sansLabel" /> <input>
 			
 		</form>
