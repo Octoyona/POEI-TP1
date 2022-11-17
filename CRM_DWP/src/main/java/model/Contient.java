@@ -3,12 +3,12 @@ package model;
 public class Contient {
 	private Long   id;
     private Produit produit;
-    private int quantité;
+    private int quantite;
     
     //Constructeurs
-	public Contient(Produit produit, int quantité) {
+	public Contient(Produit produit, int quantite) {
 		this.produit = produit;
-		this.quantité = quantité;
+		this.quantite = quantite;
 	}
 	
 	public Contient() {		
@@ -31,17 +31,17 @@ public class Contient {
 		this.produit = produit;
 	}
 
-	public int getQuantité() {
-		return quantité;
+	public int getQuantite() {
+		return quantite;
 	}
 
-	public void setQuantité(int quantité) {
-		this.quantité = quantité;
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
 	}
 	
 	@Override
 	public String toString() {
-		return getId() + " : " + getProduit() + " : " + getQuantité();
+		return getId() + " : " + getProduit() + " : " + getQuantite();
 	}
     
   

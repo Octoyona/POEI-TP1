@@ -31,11 +31,10 @@
 						</tr>
 					</thead>
 					<tbody>
-								<c:forEach items="${panier.produits}" var="panier">
+								<c:forEach items="${panier.id}" var="panier">
 			
-								<td><c:out value="${ panier.produit.nom}" /></td>
-								<td><c:out value="${ panier.produit.description}" /></td>
-								<td><c:out value="${ panier.produit.prix}" /></td>
+								<td><c:out value="${ panier.contients}" /></td>
+															
 								<td>
 									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ produit.id}" /></c:url>">Voir le détail du produit</a>	
 																|

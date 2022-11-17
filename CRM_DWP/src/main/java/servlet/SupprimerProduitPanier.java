@@ -7,19 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ContientDao;
 import dao.DaoException;
 import dao.DaoFactory;
 import dao.ProduitDao;
 
 @WebServlet("/supprimerProduit")
-public class SupprimerProduit extends HttpServlet {
+public class SupprimerProduitPanier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private ProduitDao produitDao;
+	private ContientDao contientDao;
 	
-    public SupprimerProduit() {
+    public SupprimerProduitPanier() {
         super();
-        produitDao = DaoFactory.getInstance().getProduitDao();
+        contientDao = DaoFactory.getInstance().getContientDao();
     }
 
 
@@ -27,7 +28,7 @@ public class SupprimerProduit extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			long id = Long.parseLong(request.getParameter("id"));
-			produitDao.supprimer(id);
+			contientDao.supprimer(id);
 			
 			//Ajout d'un élément dans la session
 			request.getSession().setAttribute("confirmMessage", "Le produit a bien été supprimé de votre panier.");
