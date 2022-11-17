@@ -59,6 +59,7 @@ public class ClientForm {
 		
 		AdresseForm adresseForm = new AdresseForm();
 		Adresse adresse = adresseForm.saveAdresse(request, AdresseForm.CREATION);
+		
 		long idClient;
 		Client client = new Client();
 		
