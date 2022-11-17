@@ -12,12 +12,12 @@ import model.Client;
 
 public class ClientDaoImpl implements ClientDao {
 	
-	private static final String SQL_INSERT       = "INSERT INTO client(nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre) VALUES(?,?,?,?,?,?,?,?)";
-	private static final String SQL_SELECT       = "SELECT id,nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre FROM client";
-    private static final String SQL_SELECT_BY_ID = "SELECT id,nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre FROM client WHERE id = ?";
-	private static final String SQL_DELETE_BY_ID = "DELETE FROM client WHERE id = ? ";
+	private static final String SQL_INSERT       = "INSERT INTO clients(nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String SQL_SELECT       = "SELECT id,nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre FROM clients";
+    private static final String SQL_SELECT_BY_ID = "SELECT id,nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre FROM clients WHERE id = ?";
+	private static final String SQL_DELETE_BY_ID = "DELETE FROM clients WHERE id = ? ";
 	
-	private static final String SQL_UPDATE = "UPDATE client SET nom=?, prenom=?, id_adresse=?; nom_societe=?, mail=? telephone=?, etat=?, genre=? WHERE id = ?";
+	private static final String SQL_UPDATE = "UPDATE clients SET nom=?, prenom=?, id_adresse=?; nom_societe=?, mail=? telephone=?, etat=?, genre=? WHERE id = ?";
 	
 	private DaoFactory factory;
 	

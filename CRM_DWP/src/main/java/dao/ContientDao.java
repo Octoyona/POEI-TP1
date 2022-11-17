@@ -6,14 +6,16 @@ import model.Contient;
 
 public interface ContientDao {
 
-	void         	creer( Contient contient ) throws DaoException;
+	void         	creer( Contient contient, long idPanier) throws DaoException;
 
     Contient       	trouver( long id ) throws DaoException;
 
     List<Contient> 	lister() throws DaoException;
+    
+    List<Contient> 	listerPanier(long id) throws DaoException;
 
     void         	supprimer( long id ) throws DaoException;
 
-    void         	update( Contient contient ) throws DaoException;
+    void         	update( Contient contient, long idPanier) throws DaoException;
 	
 }

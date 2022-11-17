@@ -6,6 +6,7 @@ public class Panier {
 	private Long   id;
     private Client clients;
     private List<Contient> contients;
+    private float prixTotal;
     
     //Constructeurs
 	public Panier() {
@@ -15,6 +16,7 @@ public class Panier {
 	public Panier(Client clients) {
 		this.clients = clients;
 		this.contients = new ArrayList<Contient>();
+		this.prixTotal = 0;
 	}
 	
 	//Getters & setters
@@ -41,7 +43,14 @@ public class Panier {
 	public void setClients(Client clients) {
 		this.clients = clients;
 	}
-  
+
+	public float getPrixTotal() {
+		for(Contient contient : contients) {
+			this.prixTotal += contient.getPrixTotal();
+		}
+		return this.prixTotal;
+	}
+
 	@Override
 	public String toString() {
 		return getId() + " : " + getClients();
