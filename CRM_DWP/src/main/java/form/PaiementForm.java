@@ -51,6 +51,8 @@ public class PaiementForm {
 		String code_confidentiel = request.getParameter("codeConfidentiel");
 		String banque = request.getParameter("banque");
 		
+		Paiement paiement = new Paiement();
+		
 		//Ajout des contrôles
 		if(numero_carte != null) {
 			if(numero_carte.length() < 2 || numero_carte.length() > 255) {

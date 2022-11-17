@@ -28,6 +28,7 @@ public class CreerClient extends HttpServlet {
 		try {
 			client = clientForm.saveClient(request, ClientForm.CREATION);
 			request.setAttribute("client", client);
+			request.setAttribute("erreurs", clientForm.getErreurs());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

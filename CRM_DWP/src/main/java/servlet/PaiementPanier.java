@@ -16,7 +16,7 @@ import model.Client;
 import model.Paiement;
 import model.Panier;
 
-@WebServlet("/paiement")
+@WebServlet("/paiementPanier")
 public class PaiementPanier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private PanierDao panierDao;
