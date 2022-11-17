@@ -2,13 +2,11 @@ package model;
 
 public class Contient {
 	private Long   id;
-    private Panier panier;
     private Produit produit;
     private int quantité;
     
     //Constructeurs
-	public Contient(Panier panier, Produit produit, int quantité) {
-		this.panier = panier;
+	public Contient(Produit produit, int quantité) {
 		this.produit = produit;
 		this.quantité = quantité;
 	}
@@ -23,14 +21,6 @@ public class Contient {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Panier getPanier() {
-		return panier;
-	}
-
-	public void setPanier(Panier panier) {
-		this.panier = panier;
 	}
 
 	public Produit getProduit() {
@@ -51,7 +41,7 @@ public class Contient {
 	
 	@Override
 	public String toString() {
-		return getId() + " : " + getPanier() + " : " + getProduit() + " : " + getQuantité();
+		return getId() + " : " + getProduit() + " : " + getQuantité();
 	}
     
   
