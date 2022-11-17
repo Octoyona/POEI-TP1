@@ -17,12 +17,12 @@
 	<h1 class="title">Bienvenue sur groupe2.com</h1>
 	<h2>Vous cherchez à vous équiper pour devenir un super développeur? </h2>
 	<h2>Vous êtes au bon endroit</h2>
-	<button type="button" class="btn btn-outline-success" id="boutonProduits"><a href="<c:url value='/listeProduits'/>">Produits</a></button>
+	<!--  <button type="button" class="btn btn-outline-success" id="boutonProduits"><a href="<c:url value='/listeProduits'/>">Produits</a></button>-->
 	<div>
 			<img
 				src="https://cdn.pixabay.com/photo/2022/01/04/00/49/good-job-6913940__340.png"
 				alt="" />
 	</div>
-	<button type="button" class="btn btn-outline-success" id="s'inscrire"><a href="<c:url value='/creerClient'/>">S'inscrire</a></button>
+	<!--<button type="button" class="btn btn-outline-success" id="s'inscrire"><a href="<c:url value='/creerClient'/>">S'inscrire</a></button>-->
 </body>
 </html>
