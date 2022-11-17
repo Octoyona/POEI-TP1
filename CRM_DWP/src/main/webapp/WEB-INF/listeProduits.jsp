@@ -34,7 +34,7 @@
 							<td><c:out value="${produit.prix}" /></td>
 							<td><a href="
 							<c:url value="detailsProduit"><c:param name="id" value="${produit.id}" /></c:url>
-							">Voir d�tails</a></td>
+							">Voir détail</a></td>
 							<td><a href="
 							<c:url value="ajouterProduit?idClient=1"><c:param name="id" value="${produit.id}" /></c:url> 
 							">Ajouter au panier</a></td>																	<!-- id provisoire !!! -->
