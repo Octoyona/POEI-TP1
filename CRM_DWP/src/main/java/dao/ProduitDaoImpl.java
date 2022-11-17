@@ -136,7 +136,7 @@ public class ProduitDaoImpl implements ProduitDao {
 			  }
 		      ps.close();
 	    } catch(SQLException e) {
-	    	throw new DaoException("Erreur de suppression BDD Porduit", e);
+	    	throw new DaoException("Erreur de suppression BDD Produit", e);
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
