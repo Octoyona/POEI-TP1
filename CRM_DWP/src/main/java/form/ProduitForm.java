@@ -10,9 +10,6 @@ import dao.DaoFactory;
 import dao.ProduitDao;
 import model.Produit;
 
-
-import java.util.regex.*;
-
 public class ProduitForm {
        
 	ProduitDao produitDao;
