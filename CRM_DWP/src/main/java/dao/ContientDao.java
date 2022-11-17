@@ -11,6 +11,8 @@ public interface ContientDao {
     Contient       	trouver( long id ) throws DaoException;
 
     List<Contient> 	lister() throws DaoException;
+    
+    List<Contient> 	listerPanier(long id) throws DaoException;
 
     void         	supprimer( long id ) throws DaoException;
 

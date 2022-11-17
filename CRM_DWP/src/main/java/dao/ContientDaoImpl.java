@@ -15,6 +15,7 @@ public class ContientDaoImpl implements ContientDao {
 	private static final String SQL_INSERT       = "INSERT INTO contient(id_panier, id_produit, quantite) VALUES(?,?,?)";
 	private static final String SQL_SELECT       = "SELECT id, id_panier, id_produit, quantite FROM contient";
     private static final String SQL_SELECT_BY_ID = "SELECT id, id_panier, id_produit, quantite FROM contient WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID_PANIER = "SELECT id, id_panier, id_produit, quantite FROM contient WHERE id_panier = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM contient WHERE id = ? ";
 	private static final String SQL_UPDATE 		 = "UPDATE contient SET id_panier = ?, id_produit = ?, quantite = ?  WHERE id = ?";
 	
@@ -35,7 +36,7 @@ public class ContientDaoImpl implements ContientDao {
 			PreparedStatement pst = con.prepareStatement( SQL_INSERT, Statement.RETURN_GENERATED_KEYS );
 			pst.setLong( 1, idPanier);
 			pst.setLong( 2, contient.getProduit().getId());
-			pst.setInt( 3,contient.getQuantité());
+			pst.setInt( 3,contient.getQuantite());
 						
 			int statut = pst.executeUpdate();
 
@@ -136,7 +137,7 @@ public class ContientDaoImpl implements ContientDao {
 			PreparedStatement pst = con.prepareStatement( SQL_UPDATE );
 			pst.setLong(1, idPanier);
 			pst.setLong(2, contient.getProduit().getId());
-			pst.setInt(3, contient.getQuantité());
+			pst.setInt(3, contient.getQuantite());
 			pst.setLong(4, contient.getId());	
 			
 			int statut = pst.executeUpdate();
@@ -158,7 +159,7 @@ public class ContientDaoImpl implements ContientDao {
 		Contient c = new Contient();
 				
 		c.setId(resultSet.getLong("id"));
-		c.setQuantité(resultSet.getInt("quantite"));		
+		c.setQuantite(resultSet.getInt("quantite"));		
 		
 		ProduitDao produitDao = DaoFactory.getInstance().getProduitDao();
 		try {
@@ -170,4 +171,27 @@ public class ContientDaoImpl implements ContientDao {
 		return c;
 	}
 
+
+	@Override
+	public List<Contient> listerPanier(long id) throws DaoException {
+		List<Contient> listeContient = new ArrayList<Contient>();
+		Connection   con=null;
+		try {
+			  con = factory.getConnection();
+			  PreparedStatement pst = con.prepareStatement( SQL_SELECT_BY_ID_PANIER );
+		      ResultSet rs;
+		      pst.setLong(1, id);
+		      rs  = pst.executeQuery();
+		      while ( rs.next() ) {
+		    	  listeContient.add( map(rs) );
+		      }
+		      rs.close();
+		      pst.close();
+	    } catch(SQLException e) {
+	    	throw new DaoException("Erreur de lecture BDD Contient", e);
+	    } finally {
+	    	factory.releaseConnection(con);
+		}		
+		return listeContient;
+	}
 }
