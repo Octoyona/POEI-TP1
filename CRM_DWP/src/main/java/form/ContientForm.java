@@ -2,17 +2,13 @@ package form;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import dao.DaoException;
 import dao.DaoFactory;
-import model.Adresse;
-import model.Client;
 import model.Contient;
 import model.Produit;
-import dao.ClientDao;
 import dao.ContientDao;
 
 public class ContientForm {
@@ -50,16 +46,18 @@ public class ContientForm {
 			return true;
 		}
 	}
-	
 
 	public Contient saveContient(HttpServletRequest request, int choix) {
        	
-		int quantite = Integer.parseInt(request.getParameter("quantite"));
+		String quantiteString = request.getParameter("quantite");
 		ProduitForm produitForm = new ProduitForm();
 		Produit produit = produitForm.saveProduit(request, ProduitForm.CREATION);
-		
+			
 		long idContient;
 		Contient contient = new Contient();
+		int quantite=0;
+		
+		long idClient = Long.parseLong(request.getParameter("idClient"));
 		
 		if(this.choix==MODIFICATION) {
 			idContient = Long.parseLong(request.getParameter("id"));
@@ -72,23 +70,41 @@ public class ContientForm {
 		
 		//Ajout des contrôles
 
-		if(quantite != null) {
-			if(Pattern.matches("/[0-9]/g", quantite)) {
-				erreurs.put("quantiteProduit", "Quantité invalide");
+		if(isNumeric(quantiteString)) {
+			quantite = Integer.parseInt(quantiteString);
+			if(quantite>1000000) {
+				erreurs.put("quantiteProduit", "Vous êtes trop gourmand, trop grande quantité");
+			} else if (quantite<0){
+				erreurs.put("quantiteProduit", "Ce serait bien d'ajouter au moins 1 produit");
+			}else {
+				contient.setQuantite(quantite);
 			}
+		} else {
+			erreurs.put("quantiteProduit", "La quantité doit être un nombre");
 		}
 		
-		contient.setQuantite(quantite);
 		contient.setProduit(produit);
 				
 		if(isValid()) {
 			try {
-				if(this.choix==CREATION) this.contientDao.creer(contient);
-				else if (this.choix==MODIFICATION) this.contientDao.update(contient);
+				if(this.choix==CREATION) this.contientDao.creer(contient,idClient);
+				else if (this.choix==MODIFICATION) this.contientDao.update(contient,idClient);
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}
 		}
     	return contient;
     }
+	
+	private boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        Integer.parseInt(strNum);
+	    } catch (NumberFormatException e) {
+	        return false;
+	    }
+	    return true;
+	}
 }

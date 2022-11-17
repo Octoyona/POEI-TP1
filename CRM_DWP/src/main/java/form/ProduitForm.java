@@ -50,7 +50,7 @@ public class ProduitForm {
 	}
 	
 
-	public Produit saveAdresse(HttpServletRequest request, int choix) {
+	public Produit saveProduit(HttpServletRequest request, int choix) {
        		
 		String nom = request.getParameter("nomProduit");
 		String description = request.getParameter("descriptionProduit");
