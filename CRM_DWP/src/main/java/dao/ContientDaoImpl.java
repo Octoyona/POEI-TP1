@@ -14,7 +14,7 @@ public class ContientDaoImpl implements ContientDao {
 
 	private static final String SQL_INSERT       = "INSERT INTO contient(id_panier, id_produit, quantite) VALUES(?,?,?)";
 	private static final String SQL_SELECT       = "SELECT id, id_panier, id_produit, quantite FROM contient";
-    private static final String SQL_SELECT_BY_ID = "SELECT id_panier, id_produit, quantite FROM contient WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID = "SELECT id, id_panier, id_produit, quantite FROM contient WHERE id = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM contient WHERE id = ? ";
 	private static final String SQL_UPDATE 		 = "UPDATE contient SET id_panier = ?, id_produit = ?, quantite = ?  WHERE id = ?";
 	
