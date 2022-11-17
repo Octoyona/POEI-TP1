@@ -36,6 +36,6 @@ public class SupprimerProduitPanier extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		response.sendRedirect( request.getContextPath() + "/DetailsPanier" );
+		response.sendRedirect( request.getContextPath() + "/detailsPanier" );
 	}
 }
