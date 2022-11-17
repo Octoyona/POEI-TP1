@@ -27,23 +27,31 @@
 								<th>Produit</th>
 								<th>Description</th>
 								<th>Prix</th>
-								<th></th>
+								<th>Quantité</th>
+								<th>Total</th>
 						</tr>
 					</thead>
 					<tbody>
-								<c:forEach items="${panier.produits}" var="panier">
-			
-								<td><c:out value="${ panier.produit.nom}" /></td>
-								<td><c:out value="${ panier.produit.description}" /></td>
-								<td><c:out value="${ panier.produit.prix}" /></td>
+						<c:forEach items="${panier.contients}" var="contient" varStatus="infoBoucle">
+							<tr class="${infoBoucle.index % 2 == 0 ? 'pair' : 'impair'}">
+								<td><c:out value="${ contient.produit.nom}" /></td>
+								<td><c:out value="${ contient.produit.description}" /></td>
+								<td><c:out value="${ contient.produit.prix}" /></td>
+								<td><c:out value="${ contient.quantite}" /></td>
+								<td><c:out value="${ contient.prixTotal}" /></td>
 								<td>
-									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ produit.id}" /></c:url>">Voir le détail du produit</a>	
-																|
-									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ produit.id}" /></c:url>">Modifier la quantité</a>
-									|
-									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ produit.id}" /></c:url>">Supprimer du panier</a>
+									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le détail du produit</a>	
+
+									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantité</a>
+
+									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Supprimer du panier</a>
 								</td>
+							</tr>
 						</c:forEach>
+						<tr>
+							<th colspan="4"></th>
+    						<th><c:out value="${ panier.prixTotal}" /></th>
+						</tr>
 					</tbody>
 				</table>
 			</c:otherwise>
