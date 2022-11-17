@@ -9,28 +9,30 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/menu.jsp"/>
-	<c:choose>
-		<c:when test="${ empty produits }">
-			Aucun produit trouvé
-		</c:when>
-		<c:otherwise>
-			<table>
-				<tr>
-					<th>Produit</th>
-					<th>Description</th>
-					<th>Prix</th>
-					<th></th>
-				</tr>
-				<c:forEach items="${produits}" var="produit">
+	<div class="view">
+		<c:choose>
+			<c:when test="${ empty produits }">
+				Aucun produit trouvé
+			</c:when>
+			<c:otherwise>
+				<table>
 					<tr>
-						<td><c:out value="${produit.nom}"/></td>
-						<td><c:out value="${produit.description}"/></td>
-						<td><c:out value="${produit.prix}"/></td>
-						<td><a>Ajouter au panier</a></td>
+						<th>Produit</th>
+						<th>Description</th>
+						<th>Prix</th>
+						<th>Actions</th>
 					</tr>
-				</c:forEach>
-			</table>
-		</c:otherwise>
-	</c:choose>
+					<c:forEach items="${produits}" var="produit" varStatus="infoBoucle">
+						<tr class="${infoBoucle.index % 2 == 0 ? 'pair' : 'impair'}">
+							<td><c:out value="${produit.nom}"/></td>
+							<td><c:out value="${produit.description}"/></td>
+							<td><c:out value="${produit.prix}"/></td>
+							<td><a>Ajouter au panier</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</div>
 </body>
 </html>
