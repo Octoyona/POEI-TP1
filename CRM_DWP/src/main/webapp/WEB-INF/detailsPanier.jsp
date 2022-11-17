@@ -13,12 +13,12 @@
 	<c:import url="/WEB-INF/menu.jsp" />
 
 	<div class="view">
-		
-		<a href="<c:url value="/listeProduits" />"><button>Ajouter un produit</button></a>
+
 		
 		<c:choose>
 			<c:when test="${ empty panier }">
 				<p>Aucun produit dans votre panier! N'hésitez pas à en rajouter ;)...</p>
+					<a href="<c:url value="/listeProduits" />"><button>Ajouter un produit</button></a>
 			</c:when>
 			<c:otherwise>	
 				<table>
