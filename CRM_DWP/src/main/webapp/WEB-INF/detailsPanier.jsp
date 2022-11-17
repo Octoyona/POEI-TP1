@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Détail du panier client</title>
+<title>Dï¿½tail du panier client</title>
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/inc/style.css" />" />
 </head>
@@ -17,7 +17,7 @@
 		
 		<c:choose>
 			<c:when test="${ empty panier }">
-				<p>Aucun produit dans votre panier! N'hésitez pas à en rajouter ;)...</p>
+				<p>Aucun produit dans votre panier! N'hï¿½sitez pas ï¿½ en rajouter ;)...</p>
 					<a href="<c:url value="/listeProduits" />"><button>Ajouter un produit</button></a>
 			</c:when>
 			<c:otherwise>	
@@ -27,22 +27,31 @@
 								<th>Produit</th>
 								<th>Description</th>
 								<th>Prix</th>
-								<th></th>
+								<th>Quantitï¿½</th>
+								<th>Total</th>
 						</tr>
 					</thead>
 					<tbody>
-								<c:forEach items="${panier.id}" var="panier">
-			
-								<td><c:out value="${ panier.contients}" /></td>
-															
+						<c:forEach items="${panier.contients}" var="contient" varStatus="infoBoucle">
+							<tr class="${infoBoucle.index % 2 == 0 ? 'pair' : 'impair'}">
+								<td><c:out value="${ contient.produit.nom}" /></td>
+								<td><c:out value="${ contient.produit.description}" /></td>
+								<td><c:out value="${ contient.produit.prix}" /></td>
+								<td><c:out value="${ contient.quantite}" /></td>
+								<td><c:out value="${ contient.prixTotal}" /></td>
 								<td>
-									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ produit.id}" /></c:url>">Voir le détail du produit</a>	
-																|
-									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ produit.id}" /></c:url>">Modifier la quantité</a>
-									|
-									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ produit.id}" /></c:url>">Supprimer du panier</a>
+									<a href="<c:url value="/listeProduits"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Voir le dï¿½tail du produit</a>	
+
+									<a href="<c:url value="/modifierProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Modifier la quantitï¿½</a>
+
+									<a href="<c:url value="/supprimerProduit"><c:param name="id" value="${ contient.produit.id}" /></c:url>">Supprimer du panier</a>
 								</td>
+							</tr>
 						</c:forEach>
+						<tr>
+							<th colspan="4"></th>
+    						<th><c:out value="${ panier.prixTotal}" /></th>
+						</tr>
 					</tbody>
 				</table>
 			</c:otherwise>

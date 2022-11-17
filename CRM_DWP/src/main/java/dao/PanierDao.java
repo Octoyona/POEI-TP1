@@ -9,6 +9,8 @@ public interface PanierDao {
 	void         creer( Panier panier ) throws DaoException;
 
     Panier       trouver( long id ) throws DaoException;
+    
+    Panier       trouverClient( long id ) throws DaoException;
 
     List<Panier> lister() throws DaoException;
 

@@ -7,6 +7,28 @@ body {
 	text-align : center;
 }
 
+
+/*Page d'accueil */
+
+button{
+	width : 8rem;
+	position : relative;
+	left : 46%;
+
+}
+
+button a {
+	color : black !important;
+	text-decoration : none !important;
+	
+}
+
+button a:hover {
+	color : white !important;
+	
+}
+
+
 .menu {
 	align-self:center;
 	width:50%;

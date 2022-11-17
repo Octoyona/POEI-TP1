@@ -12,11 +12,12 @@ import model.Panier;
 
 public class PanierDaoImpl implements PanierDao{
 
-	private static final String SQL_INSERT       = "INSERT INTO panier(id_client) VALUES(?)";
-	private static final String SQL_SELECT       = "SELECT id, id_client FROM panier";
-    private static final String SQL_SELECT_BY_ID = "SELECT id, id_client FROM panier WHERE id = ?";
-	private static final String SQL_DELETE_BY_ID = "DELETE FROM panier WHERE id = ? ";
-	private static final String SQL_UPDATE 		 = "UPDATE panier SET id_client = ? WHERE id = ?";
+	private static final String SQL_INSERT       = "INSERT INTO paniers(id_client) VALUES(?)";
+	private static final String SQL_SELECT       = "SELECT id, id_client FROM paniers";
+    private static final String SQL_SELECT_BY_ID = "SELECT id, id_client FROM paniers WHERE id = ?";
+    private static final String SQL_SELECT_BY_ID_CLIENT = "SELECT id, id_client FROM paniers WHERE id_client = ?";
+	private static final String SQL_DELETE_BY_ID = "DELETE FROM paniers WHERE id = ? ";
+	private static final String SQL_UPDATE 		 = "UPDATE paniers SET id_client = ? WHERE id = ?";
 	
 	private DaoFactory factory;
 	
@@ -63,6 +64,33 @@ public class PanierDaoImpl implements PanierDao{
 		try {
 			  con = factory.getConnection();
 			  pst = con.prepareStatement( SQL_SELECT_BY_ID );
+			  pst.setLong(1, id);
+		      rs  = pst.executeQuery();
+		      if ( rs.next() ) {
+		    	  panier = map(rs);
+		      } else {
+		    	  throw new DaoException("Erreur de recherche BDD Panier");
+		      }
+		      rs.close();
+		      pst.close();
+	    } catch(SQLException e) {
+	    	throw new DaoException("Erreur de recherche BDD Panier", e);
+	    } finally {
+	    	factory.releaseConnection(con);
+		}
+		
+		return panier;
+	}
+	
+	@Override
+	public Panier trouverClient(long id) throws DaoException {
+		Panier            panier=null;
+		Connection        con=null;
+		PreparedStatement pst=null;
+		ResultSet         rs=null;
+		try {
+			  con = factory.getConnection();
+			  pst = con.prepareStatement( SQL_SELECT_BY_ID_CLIENT );
 			  pst.setLong(1, id);
 		      rs  = pst.executeQuery();
 		      if ( rs.next() ) {
@@ -138,24 +166,32 @@ public class PanierDaoImpl implements PanierDao{
                 throw new DaoException( "Echec mise à jour Panier" );
             }
 			pst.close();
-			
+
 	    } catch(SQLException e) {
 	    	throw new DaoException("Echec mise à jour Panier",e);
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
 	}
-	
-	
+
 	private static Panier map(ResultSet resultSet) throws SQLException {
 		Panier p = new Panier();
 		p.setId(resultSet.getLong("id"));
 		
 		//Vérifier que ça a bien été créé
 		ClientDao clientDao = DaoFactory.getInstance().getClientDao();
+		long idClient = resultSet.getLong("id_client");
+		
 		try {
-			p.setClients(clientDao.trouver(resultSet.getLong("id_client")));
+			p.setClients(clientDao.trouver(idClient));
 		}catch(DaoException e) {
+			e.printStackTrace();
+		}
+		
+		ContientDao contientDao = DaoFactory.getInstance().getContientDao();
+		try {
+			p.setContients(contientDao.listerPanier(idClient));
+		} catch (DaoException e) {
 			e.printStackTrace();
 		}
 	
