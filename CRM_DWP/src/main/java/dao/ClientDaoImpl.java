@@ -30,11 +30,11 @@ public class ClientDaoImpl implements ClientDao {
 		Connection con=null;
 		try {
 			con = factory.getConnection();
-			
+						
 			PreparedStatement pst = con.prepareStatement( SQL_INSERT, Statement.RETURN_GENERATED_KEYS );
-			pst.setString( 1, client.getNom() );
-			pst.setString( 2, client.getPrenom() );
-			pst.setLong( 3, client.getAdresse().getId() );
+			pst.setString( 1, client.getNom());
+			pst.setString( 2, client.getPrenom());
+			pst.setLong( 3, client.getAdresse().getId());
 			pst.setString( 4, client.getNom_societe() );
 			pst.setString( 5, client.getMail() );
 			pst.setString( 6, client.getTelephone() );

@@ -6,7 +6,7 @@ import model.Adresse;
 
 public interface AdresseDao {
 	
-	void         creer( Adresse adresse ) throws DaoException;
+	long         creer( Adresse adresse ) throws DaoException;
 
 	Adresse       trouver( long id ) throws DaoException;
 
