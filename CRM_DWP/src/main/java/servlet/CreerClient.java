@@ -21,7 +21,8 @@ import dao.AdresseDao;
 public class CreerClient extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	ClientDao clientDao;
+	private ClientDao clientDao;
+
     public CreerClient() {
         super();
         clientDao = DaoFactory.getInstance().getClientDao();
@@ -106,9 +107,6 @@ public class CreerClient extends HttpServlet {
 		} catch(DaoException e) {
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 		if(erreurs.isEmpty()) {
 			try {
