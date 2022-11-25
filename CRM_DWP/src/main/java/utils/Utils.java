@@ -2,10 +2,7 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.service.spi.ServiceException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +21,7 @@ import model.Contient;
 import model.Paiement;
 import model.Panier;
 import model.Produit;
+import services.ServiceException;
 import model.Client;
 
 public class Utils {
@@ -61,11 +59,11 @@ public class Utils {
 			parameter = data.get(nameField).getAsString().trim();
 			
 			if(parameter.length()<minLength) {
-				throw new ServiceException("Le champ " + nameField + "doit contenir au minimum " + minLength + "caractères.");
+				throw new ServiceException("Le champ " + nameField + "doit contenir au minimum " + minLength + " caractères.");
 			}
 			
 			if(parameter.length()>maxLength) {
-				throw new ServiceException("Le champ " + nameField + "doit contenir au maximum " + maxLength + "caractères.");
+				throw new ServiceException("Le champ " + nameField + "doit contenir au maximum " + maxLength + " caractères.");
 			}
 		}
 		
