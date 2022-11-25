@@ -9,25 +9,25 @@
 */
 
 --1
-SELECT * FROM produits WHERE nom LIKE 'c%' OR nom LIKE 'C%';
+SELECT * FROM produit WHERE nom LIKE 'c%' OR nom LIKE 'C%';
 
 --2
-SELECT * FROM produits WHERE nom LIKE '%c%' OR nom LIKE '%C%';
+SELECT * FROM produit WHERE nom LIKE '%c%' OR nom LIKE '%C%';
 
 --3
-SELECT * FROM clients INNER JOIN adresses ON clients.id_adresse=adresses.id WHERE adresses.ville='Nantes'
+SELECT * FROM client INNER JOIN adresse ON client.id_adresse=adresses.id WHERE adresse.ville='Nantes'
 
 --4
-SELECT produits.nom FROM paniers INNER JOIN contient ON paniers.id=contient.id_panier INNER JOIN produits ON contient.id_produit=produits.id WHERE paniers.id_client=1;
+SELECT produit.nom FROM panier INNER JOIN contient ON panier.id=contient.id_panier INNER JOIN produit ON contient.id_produit=produit.id WHERE panier.id_client=1;
 
 --5
 SELECT contient.id_panier AS panier, COUNT(*) AS nb_produits FROM contient GROUP BY contient.id_panier;
 
 --6
-SELECT paniers.id_client AS client, SUM(produits.prix) AS prix_total FROM produits INNER JOIN contient ON produits.id=contient.id_produit INNER JOIN paniers ON contient.id_panier=paniers.id WHERE paniers.id_client=1;
+SELECT panier.id_client AS client, SUM(produit.prix) AS prix_total FROM produit INNER JOIN contient ON produit.id=contient.id_produit INNER JOIN panier ON contient.id_panier=panier.id WHERE panier.id_client=1;
 
 --7
-SELECT paniers.id AS panier FROM paniers INNER JOIN contient ON paniers.id=contient.id_panier INNER JOIN produits ON produits.id=contient.id_produit WHERE produits.nom='clavier';
+SELECT panier.id AS panier FROM panier INNER JOIN contient ON panier.id=contient.id_panier INNER JOIN produit ON produit.id=contient.id_produit WHERE produit.nom='clavier';
 
 --8
-SELECT clients.nom FROM clients INNER JOIN paniers ON clients.id=paniers.id_client;
+SELECT client.nom FROM client INNER JOIN panier ON client.id=paniers.id_client;
