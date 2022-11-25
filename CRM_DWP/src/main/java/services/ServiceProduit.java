@@ -33,8 +33,8 @@ public class ServiceProduit {
 	public void ajouter(JsonObject data) throws ServiceException{
 		try {
 			String nom = Utils.getStringParameter(data, "nom", false, 2, 20);
-			String description = Utils.getStringParameter(data, "description", true, 0, 20);
-			String prixString = Utils.getStringParameter(data, "prix", false, 1, 255, "^\\d+$");
+			String description = Utils.getStringParameter(data, "description", true, 0, 200);
+			String prixString = Utils.getStringParameter(data, "prix", false, 1, 255, "[0-9]*.?[0-9]*");
 
 			Produit produit = new Produit();
 			produit.setNom(nom);
@@ -51,8 +51,8 @@ public class ServiceProduit {
 		try {
 			String id = Utils.getStringParameter(data, "id", false, 0, 50, "^\\d+$");
 			String nom = Utils.getStringParameter(data, "nom", false, 2, 20);
-			String description = Utils.getStringParameter(data, "description", true, 0, 20);
-			String prixString = Utils.getStringParameter(data, "prix", false, 1, 255, "^\\d+$");
+			String description = Utils.getStringParameter(data, "description", true, 0, 200);
+			String prixString = Utils.getStringParameter(data, "prix", false, 1, 255, "[0-9]*.?[0-9]*");
 
 			Produit produit = daoProduit.trouver(Long.parseLong(id));
 			produit.setNom(nom);

@@ -23,8 +23,8 @@ public class ProduitAdapter implements JsonSerializer<Produit>, JsonDeserializer
 		JsonObject json = new JsonObject();
 		json.addProperty("id", produit.getId());
 		json.addProperty("nom", produit.getNom());
-		json.addProperty("description", produit.getNom());
-		json.addProperty("prix", produit.getNom());
+		json.addProperty("description", produit.getDescription());
+		json.addProperty("prix", produit.getPrix());
 		
 		JsonArray contientsArray = new JsonArray();
 		JsonObject tmp;
