@@ -7,6 +7,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+import dao.DaoException;
+import model.Adresse;
 import model.Client;
 import model.Paiement;
 
@@ -56,5 +59,66 @@ public class ClientAdapter implements JsonSerializer<Client>{
 		return json;
 	}
 
-
+	@Override
+	public Client deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		
+		Client c = new Client();
+		
+		JsonObject data = json.getAsJsonObject();
+		
+		String nom = data.get("nom").getAsString;
+		c.setNom(nom);
+		
+		String prenom = data.get("prenom").getAsString;
+		c.setNom(prenom);
+		
+		String nomSociete = data.get("nomSociete").getAsString;
+		c.setNom(nomSociete);
+		
+		String mail = data.get("mail").getAsString;
+		c.setNom(mail);
+		
+		String telephone = data.get("telephone").getAsString;
+		c.setNom(telephone);
+		
+		String etatString = data.get("etat").getAsString;
+		int etat;
+		try {
+			etat = Integer.parseInt(etatString);
+			c.setEtat(etat);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		String genreString = data.get("genre").getAsString;
+		int genre;
+		try {
+			genre = Integer.parseInt(genreString);
+			c.setEtat(genre);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		String idAdresseString = data.get("idAdresse").getAsString;
+		Long idAdresse;
+		try {
+			idAdresse = Long.parseLong(idAdresseString);
+		
+			DaoAdresse daoAdresse = new DaoAdresse();
+			Adresse adresse = daoAdresse.trouver(idAdresse);
+			c.setAdresse(adresse);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			System.err.println("id adresse invalide");
+		}catch(DaoException e) {
+			e.printStackTrace();
+			System.err.println("erreur dao adresse");
+		}
+		
+		
+		
+		return c;
+	}
+	
+	
 }
