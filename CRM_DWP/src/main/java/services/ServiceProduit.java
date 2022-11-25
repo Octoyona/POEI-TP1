@@ -3,64 +3,76 @@ package services;
 import com.google.gson.JsonObject;
 
 import dao.DaoException;
-import daoImpl.DaoActeur;
-import models.Acteur;
+import daoImpl.DaoProduit;
+import model.Produit;
 import utils.Utils;
 
 
-public class ServiceActeur {
-	protected DaoActeur daoActeur;
+public class ServiceProduit {
+	protected DaoProduit daoProduit;
 	
-	public ServiceActeur() {
-		daoActeur = new DaoActeur();
+	public ServiceProduit() {
+		daoProduit = new DaoProduit();
 	}
 	
 	public String trouver(long id) throws ServiceException{
-		String s = null;
-		
+		Produit produit;
 		try {
-			Acteur acteur = daoActeur.trouver(id);
+			produit = daoProduit.trouver(id);
 		} catch (DaoException e) {
 			throw new ServiceException(e.getMessage());
 		}
 		
-		return s;
+		return Utils.getSuperJson().toJson(produit);
 	}
 	
 	public String lister(){
-		return Utils.getSuperJson().toJson(daoActeur.lister());
+		return Utils.getSuperJson().toJson(daoProduit.lister());
 	}
 	
 	public void ajouter(JsonObject data) throws ServiceException{
 		try {
-			String nom = Utils.getStringParameter(data, "nom", 2, 20);
-			String prenom = Utils.getStringParameter(data, "prenom", 2, 20);
-			int age = 0;
-			
-			if(nom !=null) {
-				nom = data.get("nom").getAsString();
-			} else {
-				throw new ServiceException("Le champ nom est obligatoire");
-			}
-						
+			String nom = Utils.getStringParameter(data, "nom", false, 2, 20);
+			String description = Utils.getStringParameter(data, "description", true, 0, 20);
+			String prixString = Utils.getStringParameter(data, "prix", false, 1, 255, "^\\d+$");
 
-			Acteur a = new Acteur();
-			a.setNom(nom);
-			a.setPrenom(prenom);
-			a.setAge(age);
+			Produit produit = new Produit();
+			produit.setNom(nom);
+			produit.setDescription(description);
+			produit.setPrix(Float.parseFloat(prixString));
 			
-			daoActeur.ajouter(a);
-			
-		} catch (DaoException e) {
+			daoProduit.ajouter(produit);
+		} catch(DaoException e) {
 			throw new ServiceException(e.getMessage());
 		}
 	}
 	
 	public void modifier(JsonObject data) throws ServiceException{
-		
+		try {
+			String id = Utils.getStringParameter(data, "id", false, 0, 50, "^\\d+$");
+			String nom = Utils.getStringParameter(data, "nom", false, 2, 20);
+			String description = Utils.getStringParameter(data, "description", true, 0, 20);
+			String prixString = Utils.getStringParameter(data, "prix", false, 1, 255, "^\\d+$");
+
+			Produit produit = daoProduit.trouver(Long.parseLong(id));
+			produit.setNom(nom);
+			produit.setDescription(description);
+			produit.setPrix(Float.parseFloat(prixString));
+
+			//Sauvegarde de l'auteur
+			daoProduit.modifier(produit);
+		} catch(NumberFormatException e) {
+			throw new ServiceException("Le format du paramètre id n'est pas bon.");
+		} catch(DaoException e) {
+			throw new ServiceException(e.getMessage());
+		}
 	}
 	
 	public void supprimer(long id) throws ServiceException{
-		
+		try {
+			daoProduit.supprimer(id);
+		} catch (DaoException e) {
+			throw new ServiceException(e.getMessage());
+		}
 	}
 }
