@@ -14,7 +14,7 @@ public class DaoFactory{
 	public static DaoFactory getInstance() {
 		if(DaoFactory.instanceSingleton == null) {
 			DaoFactory.instanceSingleton = new DaoFactory();
-			DaoFactory.entityManagerFactory = Persistence.createEntityManagerFactory("bdd_filmotheque");
+			DaoFactory.entityManagerFactory = Persistence.createEntityManagerFactory("crm");
 		}
 		return DaoFactory.instanceSingleton;
 	}
