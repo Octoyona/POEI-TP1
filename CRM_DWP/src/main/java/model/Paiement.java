@@ -1,25 +1,41 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "paiements")
 public class Paiement {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long   id;
-    private String numero_carte;
-    private String code_confidentiel;
+	
+	@Column(nullable = false, length = 16)
+    private String numeroCarte;
+	
+	@Column(nullable = false, length = 4)
+    private String codeConfidentiel;
+	
+	@Column(nullable = false, length = 20)
     private String banque;
+	
+	@ManyToOne( fetch=FetchType.LAZY )
     private Client client;
     
   //Constructeur
+    
     
     public Paiement() {  
     	
     }
     
-    public Paiement(String numero_carte, String code_confidentiel, String banque, Client client) {
-    	this.numero_carte = numero_carte;
-    	this.code_confidentiel = code_confidentiel;
-    	this.banque = banque;
-    	this.client = client;
-    }
 
     //Getters & setters
 	public Long getId() {
@@ -30,20 +46,20 @@ public class Paiement {
 		this.id = id;
 	}
 
-	public String getNumero_carte() {
-		return numero_carte;
+	public String getNumeroCarte() {
+		return numeroCarte;
 	}
 
-	public void setNumero_carte(String numero_carte) {
-		this.numero_carte = numero_carte;
+	public void setNumeroCarte(String numeroCarte) {
+		this.numeroCarte = numeroCarte;
 	}
 
-	public String getCode_confidentiel() {
-		return code_confidentiel;
+	public String getCodeConfidentiel() {
+		return codeConfidentiel;
 	}
 
-	public void setCode_confidentiel(String code_confidentiel) {
-		this.code_confidentiel = code_confidentiel;
+	public void setCodeConfidentiel(String codeConfidentiel) {
+		this.codeConfidentiel = codeConfidentiel;
 	}
 
 	public String getBanque() {
@@ -64,7 +80,7 @@ public class Paiement {
 	
 	@Override
 	public String toString() {
-		return getId() + " : " + getNumero_carte() + " " + getCode_confidentiel() + " - " + getBanque() + " - " + getClient().getNom() + " " + getClient().getPrenom();
+		return getId() + " : " + getNumeroCarte() + " " + getCodeConfidentiel() + " - " + getBanque() + " - " + getClient().getNom() + " " + getClient().getPrenom();
 	}
     
     
