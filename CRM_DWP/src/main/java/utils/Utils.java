@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hibernate.service.spi.ServiceException;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -12,16 +14,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import adapters.ActeurAdapter;
-import adapters.FilmAdapter;
-import models.Acteur;
-import models.Film;
-import services.ServiceException;
+import adapters.AdresseAdapter;
+
+import model.Adresse;
+
 
 public class Utils {
 	public static Gson getSuperJson() {
 		GsonBuilder gsonBuilder = new GsonBuilder()
-				.registerTypeAdapter(Acteur.class, new ActeurAdapter())
-				.registerTypeAdapter(Film.class, new FilmAdapter())
+				.registerTypeAdapter(Adresse.class, new AdresseAdapter())
 				.serializeNulls();
 				/*.registerTypeAdapter(Scenario.class, new ScenarioAdapter())
 				.registerTypeAdapter(Realisateur.class, new RealisateurAdapter());*/
