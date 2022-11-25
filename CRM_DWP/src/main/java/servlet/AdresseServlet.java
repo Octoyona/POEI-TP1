@@ -31,9 +31,9 @@ public class AdresseServlet extends HttpServlet {
 		try {
 			String idAdresse = req.getParameter("id");
 			if(idAdresse != null) {
-				response = new ServiceProduit().trouver(Long.parseLong(idAdresse));
+				response = new ServiceAdresse().trouver(Long.parseLong(idAdresse));
 			} else {
-				response = new ServiceProduit().lister();
+				response = new ServiceAdresse().lister();
 			}
 			contentType = "application/json";
 		} catch(NumberFormatException e) {
