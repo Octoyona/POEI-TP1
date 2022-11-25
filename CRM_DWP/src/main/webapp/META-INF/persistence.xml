@@ -7,12 +7,12 @@
     <persistence-unit name="crm">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
-        <class>models.Adresse</class>
-        <class>models.Client</class>
-        <class>models.Contient</class>
-        <class>models.Paiement</class>
-        <class>models.Panier</class>
-        <class>models.Produit</class>
+        <class>model.Adresse</class>
+        <class>model.Client</class>
+        <class>model.Contient</class>
+        <class>model.Paiement</class>
+        <class>model.Panier</class>
+        <class>model.Produit</class>
         
 
         <properties>
