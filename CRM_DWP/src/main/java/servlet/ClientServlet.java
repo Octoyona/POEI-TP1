@@ -16,7 +16,7 @@ import services.ServiceClient;
 import utils.Utils;
 
 
-@WebServlet("/client") //verif nom servlet
+@WebServlet("/client")
 public class ClientServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  

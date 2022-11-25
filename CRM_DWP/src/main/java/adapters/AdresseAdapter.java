@@ -29,8 +29,6 @@ public class AdresseAdapter implements JsonSerializer<Adresse>, JsonDeserializer
 		JsonObject client = new JsonObject();
 		if(adresse.getClient() != null) {
 			client.addProperty("id", adresse.getClient().getId());
-			client.addProperty("nom", adresse.getClient().getNom());
-			client.addProperty("prenom", adresse.getClient().getPrenom());
 		}
 		json.add("client", client);
 		
