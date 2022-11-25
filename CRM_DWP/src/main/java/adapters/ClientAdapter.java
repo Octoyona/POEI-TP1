@@ -2,20 +2,27 @@ package adapters;
 
 import java.lang.reflect.Type;
 
+import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+import dao.DaoException;
+import daoImpl.DaoAdresse;
+import model.Adresse;
 import model.Client;
 import model.Paiement;
 
-public class ClientAdapter implements JsonSerializer<Client>{
+public class ClientAdapter implements JsonSerializer<Client>, JsonDeserializer<Client> {
 
 	@Override
 	public JsonElement serialize(Client client, Type typeOfSrc, JsonSerializationContext context) {
 		JsonObject json = new JsonObject();
-		
+
 		json.addProperty("id", client.getId());
 		json.addProperty("nom", client.getNom());
 		json.addProperty("prenom", client.getPrenom());
@@ -24,7 +31,7 @@ public class ClientAdapter implements JsonSerializer<Client>{
 		json.addProperty("telephone", client.getTelephone());
 		json.addProperty("etat", client.getEtat());
 		json.addProperty("genre", client.getGenre());
-		
+
 		JsonObject adresse = null;
 		if(client.getAdresse() != null) {
 			adresse = new JsonObject();
@@ -35,7 +42,7 @@ public class ClientAdapter implements JsonSerializer<Client>{
 			adresse.addProperty("pays", client.getAdresse().getPays());
 		}
 		json.add("adresse", adresse);
-		
+
 		JsonObject panier = null;
 		if(client.getPanier() != null) {
 			panier = new JsonObject();
@@ -43,7 +50,7 @@ public class ClientAdapter implements JsonSerializer<Client>{
 			panier.addProperty("rue", client.getPanier().getPrixTotal());
 		}
 		json.add("panier", panier);
-		
+
 		JsonArray paiements = new JsonArray();
 		JsonObject tmp;
 		for(Paiement p : client.getPaiements()) {
@@ -54,6 +61,69 @@ public class ClientAdapter implements JsonSerializer<Client>{
 		json.add("paiements", paiements);
 
 		return json;
+	}
+
+	
+	
+	@Override
+	public Client deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+
+		Client c = new Client();
+
+		JsonObject data = json.getAsJsonObject();
+
+		String nom = data.get("nom").getAsString();
+		c.setNom(nom);
+
+		String prenom = data.get("prenom").getAsString();
+		c.setNom(prenom);
+
+		String nomSociete = data.get("nomSociete").getAsString();
+		c.setNom(nomSociete);
+
+		String mail = data.get("mail").getAsString();
+		c.setNom(mail);
+
+		String telephone = data.get("telephone").getAsString();
+		c.setNom(telephone);
+
+		String etatString = data.get("etat").getAsString();
+		int etat;
+		try {
+			etat = Integer.parseInt(etatString);
+			c.setEtat(etat);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		String genreString = data.get("genre").getAsString();
+		int genre;
+		try {
+			genre = Integer.parseInt(genreString);
+			c.setEtat(genre);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		String idAdresseString = data.get("idAdresse").getAsString();
+		Long idAdresse;
+		try {
+			idAdresse = Long.parseLong(idAdresseString);
+
+			DaoAdresse daoAdresse = new DaoAdresse();
+			Adresse adresse = daoAdresse.trouver(idAdresse);
+			c.setAdresse(adresse);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			System.err.println("id adresse invalide");
+		}catch(DaoException e) {
+			e.printStackTrace();
+			System.err.println("erreur dao adresse");
+		}
+
+
+
+		return c;
 	}
 
 
