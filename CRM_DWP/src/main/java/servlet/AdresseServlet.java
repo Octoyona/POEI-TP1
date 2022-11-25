@@ -173,7 +173,7 @@ public class AdresseServlet extends HttpServlet {
 			adresse.setClient(client);
 
 			//Sauvegarde de l'client
-			daoAdresse.update(adresse);
+			daoAdresse.modifier(adresse);
 		} catch (JsonSyntaxException e) {
 			response = "Erreur : Le format des données n'est pas bon, veuillez utiliser du JSON.";
 			responseStatus = 400;
@@ -199,7 +199,7 @@ public class AdresseServlet extends HttpServlet {
 		
 		try {
 			String idAdresse = req.getParameter("id");
-			daoAdresse.supprimer(Long.parseLong(idAdresse));
+			daoAdresse.supprimer(Integer.parseInt(idAdresse));
 		} catch(NumberFormatException e) {
 			response = "Le paramètre id n'est pas bon.";
 			responseStatus = 400;
