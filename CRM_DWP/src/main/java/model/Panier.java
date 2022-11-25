@@ -2,21 +2,37 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "panier")
 public class Panier {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long   id;
-    private Client clients;
-    private List<Contient> contients;
-    private float prixTotal;
+	
+	@ManyToOne( fetch=FetchType.LAZY, cascade=CascadeType.ALL )
+	private Client client;
+    
+    @OneToMany(mappedBy = "panier")
+	private List<Contient> contients = new ArrayList<Contient>();
     
     //Constructeurs
 	public Panier() {
 		
 	}
 	
-	public Panier(Client clients) {
-		this.clients = clients;
-		this.contients = new ArrayList<Contient>();
-		this.prixTotal = 0;
+	public Panier(Client client) {
+		this.client = client;
 	}
 	
 	//Getters & setters
@@ -35,25 +51,34 @@ public class Panier {
 	public void setContients(List<Contient> contients) {
 		this.contients = contients;
 	}
-
-	public Client getClients() {
-		return clients;
+	
+	public void addContient(Contient c) {
+		this.contients.add(c);
+	}
+	
+	public void removeContient(Contient c) {
+		this.contients.remove(c);
 	}
 
-	public void setClients(Client clients) {
-		this.clients = clients;
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public float getPrixTotal() {
+		float prixTotal=0;
 		for(Contient contient : contients) {
-			this.prixTotal += contient.getPrixTotal();
+			prixTotal += contient.getPrixTotal();
 		}
-		return this.prixTotal;
+		return prixTotal;
 	}
 
 	@Override
 	public String toString() {
-		return getId() + " : " + getClients();
+		return getId() + " : " + getClient();
 	}
 	
     

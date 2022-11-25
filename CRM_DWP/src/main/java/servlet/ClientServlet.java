@@ -27,7 +27,7 @@ public class ClientServlet extends HttpServlet {
 		int responseStatus = 200;
 		
 		try {
-			String idClient = request.getParameter("idClient"); /
+			String idClient = request.getParameter("idClient");
 			if(idClient != null) {
 				Long id = Long.parseLong(idClient);
 				if(id>0) {
