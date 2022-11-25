@@ -28,9 +28,9 @@ public class ProduitServlet extends HttpServlet {
 		String contentType = "text";
 
 		try {
-			String idAuteur = req.getParameter("id");
-			if(idAuteur != null) {
-				response = new ServiceProduit().trouver(Long.parseLong(idAuteur));
+			String idProduit = req.getParameter("id");
+			if(idProduit != null) {
+				response = new ServiceProduit().trouver(Long.parseLong(idProduit));
 			} else {
 				response = new ServiceProduit().lister();
 			}
