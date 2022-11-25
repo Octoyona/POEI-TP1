@@ -14,7 +14,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import adapters.AdresseAdapter;
+import adapters.ClientAdapter;
+import adapters.ContientAdapter;
 import adapters.PaiementAdapter;
+import adapters.PanierAdapter;
 import adapters.ProduitAdapter;
 import model.Adresse;
 import model.Contient;
@@ -26,13 +29,14 @@ import model.Client;
 public class Utils {
 	public static Gson getSuperJson() {
 		GsonBuilder gsonBuilder = new GsonBuilder()
-				.registerTypeAdapter(Panier.class, new ProduitAdapter())
+				.registerTypeAdapter(Panier.class, new PanierAdapter())
 				.registerTypeAdapter(Paiement.class, new PaiementAdapter())
 				.registerTypeAdapter(Adresse.class, new AdresseAdapter())
-				.serializeNulls();/*
-				.registerTypeAdapter(Client.class, new ClientAdapter());
 				.registerTypeAdapter(Produit.class, new ProduitAdapter())
-				.registerTypeAdapter(Contient.class, new ContientAdapter())*/
+				.registerTypeAdapter(Client.class, new ClientAdapter())
+				.registerTypeAdapter(Contient.class, new ContientAdapter())
+				.serializeNulls();
+
 
 				
 		return gsonBuilder.create();
