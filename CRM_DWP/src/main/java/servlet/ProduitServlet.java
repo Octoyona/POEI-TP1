@@ -19,7 +19,7 @@ import utils.Utils;
 public class ProduitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override //Récupération auteur
+	@Override //Récupération produit
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
 
@@ -49,7 +49,7 @@ public class ProduitServlet extends HttpServlet {
 	}
 
 
-	@Override //Création auteur
+	@Override //Création produit
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setCharacterEncoding("UTF-8");
 

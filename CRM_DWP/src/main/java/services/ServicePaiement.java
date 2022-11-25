@@ -33,27 +33,19 @@ public class ServicePaiement {
 		return Utils.getSuperJson().toJson(paiement);
 	}
 	
-	
-	
-	
-	
 	public String lister(){
 		return Utils.getSuperJson().toJson(daoPaiement.lister());
 	}
-	
-	
-	
-	
 	
 	public void ajouter(JsonObject data) throws ServiceException{
 		Client client = null; String numeroCarte = null; String codeConfidentiel = null; String banque = null;
 		String idClient = null; 
 		
 		try {
-			numeroCarte = Utils.getStringParameter(data, "numeroCarte", 16);
-			codeConfidentiel = Utils.getStringParameter(data, "codeConfidentiel", 4);
-			banque = Utils.getStringParameter(data, "codeConfidentiel", 2, 20);
-			idClient  = Utils.getStringParameter(data, "idClient", true, 0, 50, "^\\d+$");
+			numeroCarte = Utils.getStringParameter(data, "numeroCarte", false, 16, 16, "^\\d+$");
+			codeConfidentiel = Utils.getStringParameter(data, "codeConfidentiel", false, 4, 4,"/[0-9]{4}/g");
+			banque = Utils.getStringParameter(data, "codeConfidentiel",false, 2, 20);
+			idClient  = Utils.getStringParameter(data, "idClient", false, 0, 50, "^\\d+$");
 			
 			if(numeroCarte !=null) {
 				numeroCarte = data.get("numeroCarte").getAsString();
@@ -79,7 +71,6 @@ public class ServicePaiement {
 					throw new ServiceException("Le client n'existe pas. Id : "+idClient);
 			}
 
-
 			Paiement p = new Paiement();
 			p.setCodeConfidentiel(codeConfidentiel);
 			p.setNumeroCarte(numeroCarte);
@@ -100,10 +91,11 @@ public class ServicePaiement {
 		String idClient = null; String id =null;
 		
 		try {
-			numeroCarte = Utils.getStringParameter(data, "numeroCarte", 16);
-			codeConfidentiel = Utils.getStringParameter(data, "codeConfidentiel", 4);
-			banque = Utils.getStringParameter(data, "codeConfidentiel", 2, 20);
-			idClient  = Utils.getStringParameter(data, "idClient", true, 0, 50, "^\\d+$");
+			id = Utils.getStringParameter(data, "id", false, 0, 50, "^\\d+$");
+			numeroCarte = Utils.getStringParameter(data, "numeroCarte", false, 16, 16, "^\\d+$");
+			codeConfidentiel = Utils.getStringParameter(data, "codeConfidentiel", false, 4, 4,"/[0-9]{4}/g");
+			banque = Utils.getStringParameter(data, "codeConfidentiel",false, 2, 20);
+			idClient  = Utils.getStringParameter(data, "idClient", false, 0, 50, "^\\d+$");
 			
 			if(numeroCarte !=null) {
 				numeroCarte = data.get("numeroCarte").getAsString();

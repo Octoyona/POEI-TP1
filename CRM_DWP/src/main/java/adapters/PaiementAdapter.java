@@ -2,7 +2,6 @@ package adapters;
 
 import java.lang.reflect.Type;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -11,8 +10,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import daoImpl.Client;
 import dao.DaoException;
+import daoImpl.DaoClient;
 import model.Client;
 import model.Paiement;
 
@@ -56,22 +55,22 @@ public class PaiementAdapter implements JsonSerializer<Paiement>, JsonDeserializ
 		String Banque = data.get("Banque").getAsString();
 		p.setBanque(Banque);
 		
-			DaoClient daoClient = new DaoClient();
-			JsonObject client = client.getAsJsonObject();;
-			String idClient = client.get("id").getAsString();
-			Client c = new Client();
-			try {
-				c = daoClient.trouver(Long.parseLong(idClient));
-				p.setClient(c);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-				System.err.println("id client invalide");
-			} catch (DaoException e) {
-				e.printStackTrace();
-				System.err.println("erreur dao client");
-			}
 		
-
+		DaoClient daoClient = new DaoClient();
+		
+		JsonObject clientJson = data.get("client").getAsJsonObject();
+		long idClient = clientJson.get("id").getAsLong();
+		Client c = new Client();
+		try {
+			c = daoClient.trouver(idClient);
+			p.setClient(c);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			System.err.println("id client invalide");
+		} catch (DaoException e) {
+			e.printStackTrace();
+			System.err.println("erreur dao client");
+		}
 		return p;
 	}
 }

@@ -16,7 +16,7 @@ import daoImpl.DaoContient;
 import model.Contient;
 import model.Produit;
 
-public class PanierAdapter implements JsonSerializer<Produit>, JsonDeserializer<Produit> {
+public class ProduitAdapter implements JsonSerializer<Produit>, JsonDeserializer<Produit> {
 
 	@Override
 	public JsonElement serialize(Produit produit, Type typeOfSrc, JsonSerializationContext context) {

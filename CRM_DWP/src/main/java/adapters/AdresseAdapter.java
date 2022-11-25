@@ -2,7 +2,6 @@ package adapters;
 
 import java.lang.reflect.Type;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -10,10 +9,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
-import com.mysql.fabric.xmlrpc.Client;
 
 import dao.DaoException;
+import daoImpl.DaoClient;
 import model.Adresse;
+import model.Client;
 
 public class AdresseAdapter implements JsonSerializer<Adresse>, JsonDeserializer<Adresse> {
 
@@ -26,7 +26,7 @@ public class AdresseAdapter implements JsonSerializer<Adresse>, JsonDeserializer
 		json.addProperty("code_postal", adresse.getCode_postal());
 		json.addProperty("pays", adresse.getPays());
 		
-		JsonObject client = null;
+		JsonObject client = new JsonObject();
 		if(adresse.getClient() != null) {
 			client.addProperty("id", adresse.getClient().getId());
 			client.addProperty("nom", adresse.getClient().getNom());
@@ -57,12 +57,13 @@ public class AdresseAdapter implements JsonSerializer<Adresse>, JsonDeserializer
 		a.setPays(pays);
 
 		
-		daoClient daoClient = new DaoClient();
+		DaoClient daoClient = new DaoClient();
 		JsonObject clientJson = data.get("client").getAsJsonObject();
 		Long idClient = clientJson.get("id").getAsLong();
 		
 			try {
-				Client client = daoClient.trouver((idClient));
+				Client client = daoClient.trouver(idClient);
+				a.setClient(client);
 			} catch (DaoException e) {
 				e.printStackTrace();
 				System.err.println("erreur dao client");

@@ -5,6 +5,7 @@ import org.hibernate.service.spi.ServiceException;
 import com.google.gson.JsonObject;
 
 import dao.DaoException;
+import daoImpl.DaoAdresse;
 import daoImpl.DaoClient;
 import model.Adresse;
 import model.Client;
@@ -50,7 +51,7 @@ public class ServiceClient {
 		Adresse adresse = null;
 
 		try {
-			// il me reste à ajouter les regex pour mail et telephone
+			// il me reste ï¿½ ajouter les regex pour mail et telephone
 			nom = Utils.getStringParameter(data, "nom", false, 2, 255); // ajotuer dans Utils avec le boolean isNullable
 			prenom = Utils.getStringParameter(data, "prenom", false, 2, 255);
 			nomSociete = Utils.getStringParameter(data, "nomSociete", true, 0, 255);
@@ -61,7 +62,7 @@ public class ServiceClient {
 			idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
 
 			if (idAdresse != null) {
-				adresse = daoAdresse.find(Long.parseLong(idAdresse));
+				adresse = daoAdresse.trouver(Long.parseLong(idAdresse));
 				if (adresse == null) {
 					throw new ServiceException("L'adresse n'existe pas. Id : " + idAdresse);
 				}
@@ -102,7 +103,7 @@ public class ServiceClient {
 			idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
 
 			if (idAdresse != null) {
-				adresse = daoAdresse.find(Long.parseLong(idAdresse));
+				adresse = daoAdresse.trouver(Long.parseLong(idAdresse));
 				if (adresse == null) {
 					throw new ServiceException("L'adresse n'existe pas. Id : " + idAdresse);
 				}
@@ -122,14 +123,12 @@ public class ServiceClient {
 			client.setGenre(Integer.parseInt(genre));
 			client.setAdresse(adresse);
 
-			daoClient.update(client); // ne trouve pas update
+			daoClient.modifier(client); // ne trouve pas update
 			
 		} catch (NumberFormatException e) {
 			throw new ServiceException("Le format du parametre idClient n'est pas bon.");
 		} catch (DaoException e) {
 			throw new ServiceException("Erreur DAO.");
 		}
-
 	}
-
 }

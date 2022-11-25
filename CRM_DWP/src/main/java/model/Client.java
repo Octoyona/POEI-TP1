@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="clients")
+@Table(name="client")
 public class Client {
 	
 	@Id
@@ -28,10 +29,10 @@ public class Client {
 	@Column(nullable = false, length = 255)
     private String prenom;
 	
-	@OneToOne(mappedBy = "client", cascade=CascadeType.ALL) //il faut faire l'inverse vu qu'on a l'id adresse dans client?
+	@OneToOne(cascade=CascadeType.ALL) //il faut faire l'inverse vu qu'on a l'id adresse dans client?
     private Adresse adresse;
     
-	@Column(nullable = true, name = "nom_societe") //par defaut = null a  implementer
+	@Column(nullable = true, name = "nom_societe") //par defaut = null aï¿½ implementer
     private String nomSociete;
 	
 	@Column(nullable = true) //par defaut= null a implementer
@@ -46,10 +47,10 @@ public class Client {
 	@Column(nullable = true) //par defaut =0
     private int genre;
     
-	@OneToMany(mappedBy = "client", cascade=CascadeType.ALL) //pas sure du cascade
+	@OneToMany(mappedBy = "client", cascade=CascadeType.ALL)
 	private List<Paiement> paiements = new ArrayList<>();
 
-	@OneToOne(mappedBy = "client", cascade=CascadeType.ALL) //pas sure du cascade
+	@OneToOne(fetch=FetchType.LAZY )
 	private Panier panier;
 	
      //Constructeur
@@ -149,6 +150,14 @@ public class Client {
 
 	public void setPaiements(List<Paiement> paiements) {
 		this.paiements = paiements;
+	}
+	
+	public void addPaiement(Paiement p) {
+		this.paiements.add(p);
+	}
+	
+	public void removePaiement(Paiement p) {
+		this.paiements.remove(p);
 	}
 
 	public Panier getPanier() {
