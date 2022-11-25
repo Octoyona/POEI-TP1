@@ -10,23 +10,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "paiements")
+@Table(name = "paiement")
 public class Paiement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long   id;
 	
-	@Column(nullable = false, length = 16)
+	@Column(nullable = false, length = 16, name="numero_carte")
     private String numeroCarte;
 	
-	@Column(nullable = false, length = 4)
+	@Column(nullable = false, length = 4, name="code_confidentiel")
     private String codeConfidentiel;
 	
 	@Column(nullable = false, length = 20)
     private String banque;
 	
-	@ManyToOne( fetch=FetchType.LAZY )
+	@ManyToOne( fetch=FetchType.LAZY)
     private Client client;
     
   //Constructeur
