@@ -11,16 +11,16 @@ import java.util.List;
 import model.Client;
 
 public class ClientDaoImpl implements ClientDao {
-	
+
 	private static final String SQL_INSERT       = "INSERT INTO clients(nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre) VALUES(?,?,?,?,?,?,?,?)";
 	private static final String SQL_SELECT       = "SELECT id,nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre FROM clients";
     private static final String SQL_SELECT_BY_ID = "SELECT id,nom, prenom, id_adresse, nom_societe, mail, telephone, etat, genre FROM clients WHERE id = ?";
 	private static final String SQL_DELETE_BY_ID = "DELETE FROM clients WHERE id = ? ";
-	
+
 	private static final String SQL_UPDATE = "UPDATE clients SET nom=?, prenom=?, id_adresse=?; nom_societe=?, mail=? telephone=?, etat=?, genre=? WHERE id = ?";
-	
+
 	private DaoFactory factory;
-	
+
 	protected ClientDaoImpl(DaoFactory factory) {
 		this.factory = factory;
 	}
@@ -30,7 +30,7 @@ public class ClientDaoImpl implements ClientDao {
 		Connection con=null;
 		try {
 			con = factory.getConnection();
-						
+
 			PreparedStatement pst = con.prepareStatement( SQL_INSERT, Statement.RETURN_GENERATED_KEYS );
 			pst.setString( 1, client.getNom());
 			pst.setString( 2, client.getPrenom());
@@ -40,7 +40,7 @@ public class ClientDaoImpl implements ClientDao {
 			pst.setString( 6, client.getTelephone() );
 			pst.setInt( 7, client.getGenre() );
 			pst.setInt( 8, client.getEtat() );
-			
+
 			int statut = pst.executeUpdate();
 
             if ( statut == 0 ) {
@@ -54,21 +54,21 @@ public class ClientDaoImpl implements ClientDao {
             }
             rsKeys.close();
 			pst.close();
-			
+
 	    } catch(SQLException ex) {
 	    	throw new DaoException("Echec création Client",ex);
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
 	}
-	
-	
+
+
 	@Override
 	public void update(Client client) throws DaoException {
 		Connection con=null;
 		try {
 			con = factory.getConnection();
-			
+
 			PreparedStatement pst = con.prepareStatement( SQL_UPDATE );
 			pst.setString( 1, client.getNom() );
 			pst.setString( 2, client.getPrenom() );
@@ -85,7 +85,7 @@ public class ClientDaoImpl implements ClientDao {
                 throw new DaoException( "Echec modification Client" );
             }
 			pst.close();
-			
+
 	    } catch(SQLException ex) {
 	    	throw new DaoException("Echec modification Client",ex);
 	    } finally {
@@ -122,7 +122,7 @@ public class ClientDaoImpl implements ClientDao {
 
 	@Override
 	public List<Client> lister() throws DaoException {
-		List<Client> listeClients= new ArrayList<Client>();
+		List<Client> listeClients= new ArrayList<>();
 		Connection   con=null;
 		try {
 			  con = factory.getConnection();
@@ -158,7 +158,7 @@ public class ClientDaoImpl implements ClientDao {
 	    } finally {
 	    	factory.releaseConnection(con);
 		}
-		
+
 	}
     /*
      * Mapping (correspondance) entre un ResultSet et un JavaBean
@@ -170,7 +170,7 @@ public class ClientDaoImpl implements ClientDao {
         c.setNom( resultSet.getString( "nom" ) );
         c.setPrenom( resultSet.getString( "prenom" ) );
         AdresseDao adresseDao = DaoFactory.getInstance().getAdresseDao();
-        
+
         try {
 			c.setAdresse(adresseDao.trouver(resultSet.getLong( "id_adresse" )));
 		} catch (DaoException e) {
