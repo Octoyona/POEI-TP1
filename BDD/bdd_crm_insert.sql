@@ -12,12 +12,12 @@ INSERT INTO adresse(rue, ville, code_postal, pays) VALUES
 ('Bieringen', 'Schöntal', '74214', 'Allemagne'),
 ('limpiezas hadas', 'Burgos', '09001', 'Espagne');
 
-INSERT INTO client(nom, prenom, adresse_id, nom_societe, mail, telephone, genre) VALUES
-('Arquevaux', 'Pierre', 1, 'Infotel', 'pierre@infotel.com', '0606060606', 0),
-('Aribard', 'Antoine', 2, 'M2I', 'antoine@m2i.fr', '0707070707', 0),
-('Cantarano', 'Alexandra', 3, 'Infotel', 'alexandra@infotel.com', '0606060606', 1),
-('Quernec', 'Alyzee', 4, 'M2I', 'alyzee@m2i.fr', '0601060106', 1),
-('Deheack', 'Marina', 5, 'Infotel', 'marina@infotel.com', '0606060606', 1);
+INSERT INTO client(nom, prenom, adresse_id, nom_societe, mail, telephone, genre, etat) VALUES
+('Arquevaux', 'Pierre', 1, 'Infotel', 'pierre@infotel.com', '0606060606', 0, 0),
+('Aribard', 'Antoine', 2, 'M2I', 'antoine@m2i.fr', '0707070707', 0, 0),
+('Cantarano', 'Alexandra', 3, 'Infotel', 'alexandra@infotel.com', '0606060606', 1, 0),
+('Quernec', 'Alyzee', 4, 'M2I', 'alyzee@m2i.fr', '0601060106', 1, 0),
+('Deheack', 'Marina', 5, 'Infotel', 'marina@infotel.com', '0606060606', 1, 0);
 
 INSERT INTO panier(client_id) VALUES
 (4),

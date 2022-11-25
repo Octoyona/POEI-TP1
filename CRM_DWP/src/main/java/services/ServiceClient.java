@@ -36,25 +36,23 @@ public class ServiceClient {
 
 	public void supprimer(Long id) throws ServiceException {
 		try {
-			daoClient.supprimer(id); // pb avec long pour l'instant
+			daoClient.supprimer(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Le client n'existe pas. Id : " + id);
 		}
 	}
 
-	// creer ou ajouter ?
 	public void ajouter(JsonObject data) throws ServiceException {
 		String nom = null, prenom = null, nomSociete = null, mail = null, telephone = null, etat = null, genre = null,
 				idAdresse = null;
 		Adresse adresse = null;
 
 		try {
-			// il me reste � ajouter les regex pour mail et telephone
-			nom = Utils.getStringParameter(data, "nom", false, 2, 255); // ajotuer dans Utils avec le boolean isNullable
+			nom = Utils.getStringParameter(data, "nom", false, 2, 255); 
 			prenom = Utils.getStringParameter(data, "prenom", false, 2, 255);
 			nomSociete = Utils.getStringParameter(data, "nomSociete", true, 0, 255);
-			mail = Utils.getStringParameter(data, "mail", true, 0, 255);
-			telephone = Utils.getStringParameter(data, "telephone", true, 0, 2);
+			mail = Utils.getStringParameter(data, "mail", true, 0, 255,"^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+			telephone = Utils.getStringParameter(data, "telephone", true, 0, 2,"(0|\\\\+33|0033)[1-9][0-9]{8}");
 			etat = Utils.getStringParameter(data, "etat", true, 0, 2, "^\\d+$");
 			genre = Utils.getStringParameter(data, "genre", true, 0, 2, "^\\d+$");
 			idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
@@ -122,7 +120,7 @@ public class ServiceClient {
 			client.setAdresse(adresse);
 
 			daoClient.modifier(client); // ne trouve pas update
-			
+
 		} catch (NumberFormatException e) {
 			throw new ServiceException("Le format du parametre idClient n'est pas bon.");
 		} catch (DaoException e) {

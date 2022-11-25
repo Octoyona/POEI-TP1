@@ -18,41 +18,41 @@ import javax.persistence.Table;
 @Entity
 @Table(name="client")
 public class Client {
-	
+
 	@Id
 	@GeneratedValue( strategy=GenerationType.IDENTITY )
 	private Long   id;
-	
+
 	@Column(nullable = false, length = 255)
     private String nom;
-	
+
 	@Column(nullable = false, length = 255)
     private String prenom;
-	
-	@OneToOne(cascade=CascadeType.ALL) //il faut faire l'inverse vu qu'on a l'id adresse dans client?
+
+	@OneToOne(cascade=CascadeType.ALL) 
     private Adresse adresse;
-    
-	@Column(nullable = true, name = "nom_societe") //par defaut = null a� implementer
+
+	@Column(nullable = true, name = "nom_societe") 
     private String nomSociete;
-	
-	@Column(nullable = true) //par defaut= null a implementer
+
+	@Column(nullable = true) 
     private String mail;
-	
-	@Column(nullable = true) //par defaut = null a  implementer
+
+	@Column(nullable = true) 
     private String telephone;
-	
-	@Column(nullable = true) //par defaut =0
+
+	@Column(nullable = true) 
     private int etat=0;
-	
-	@Column(nullable = true) //par defaut =0
+
+	@Column(nullable = true) 
     private int genre;
-    
+
 	@OneToMany(mappedBy = "client", cascade=CascadeType.ALL)
 	private List<Paiement> paiements = new ArrayList<>();
 
 	@OneToOne(fetch=FetchType.LAZY )
 	private Panier panier;
-	
+
      //Constructeur
 	public Client() {
 
@@ -143,7 +143,7 @@ public class Client {
 		this.genre = genre;
 	}
 
-	
+
 	public List<Paiement> getPaiements() {
 		return paiements;
 	}
@@ -151,11 +151,11 @@ public class Client {
 	public void setPaiements(List<Paiement> paiements) {
 		this.paiements = paiements;
 	}
-	
+
 	public void addPaiement(Paiement p) {
 		this.paiements.add(p);
 	}
-	
+
 	public void removePaiement(Paiement p) {
 		this.paiements.remove(p);
 	}
