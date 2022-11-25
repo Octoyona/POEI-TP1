@@ -29,7 +29,7 @@ public class Client {
 	@Column(nullable = false, length = 255)
     private String prenom;
 
-	@OneToOne(cascade=CascadeType.ALL) 
+	@OneToOne 
     private Adresse adresse;
 
 	@Column(nullable = true, name = "nom_societe") 

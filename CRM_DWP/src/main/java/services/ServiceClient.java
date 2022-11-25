@@ -16,6 +16,7 @@ public class ServiceClient {
 
 	public ServiceClient() {
 		daoClient = new DaoClient();
+		daoAdresse = new DaoAdresse();
 
 	}
 
