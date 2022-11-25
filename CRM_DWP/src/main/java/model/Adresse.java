@@ -31,7 +31,7 @@ import javax.persistence.Table;
 	 @Column
 	 private String pays;
 	     
-	 @OneToOne( mappedBy="adresse", fetch=FetchType.LAZY )
+	 @OneToOne(mappedBy = "adresse", fetch=FetchType.LAZY )
 		private Client client;
 	 
 	 @PreRemove

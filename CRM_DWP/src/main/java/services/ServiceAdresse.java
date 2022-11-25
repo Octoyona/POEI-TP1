@@ -1,9 +1,6 @@
 package services;
 
-import org.hibernate.service.spi.ServiceException;
-
 import com.google.gson.JsonObject;
-
 import dao.DaoException;
 import daoImpl.DaoAdresse;
 import model.Adresse;
@@ -18,15 +15,14 @@ public class ServiceAdresse {
 	}
 	
 	public String trouver(long id) throws ServiceException{
-		String s = null;
-		
+		Adresse adresse;
 		try {
-			Adresse adresse = daoAdresse.trouver(id);
+			adresse = daoAdresse.trouver(id);
 		} catch (DaoException e) {
 			throw new ServiceException(e.getMessage());
 		}
 		
-		return s;
+		return Utils.getSuperJson().toJson(adresse);
 	}
 	
 	public String lister(){
@@ -35,10 +31,10 @@ public class ServiceAdresse {
 	
 	public void ajouter(JsonObject data) throws ServiceException{
 		try {
-			String rue = Utils.getStringParameter(data, "rue", 2, 20);
-			String ville = Utils.getStringParameter(data, "ville", 2, 20);
-			String codePostal = Utils.getStringParameter(data, "code_postal", 2, 20);
-			String pays = Utils.getStringParameter(data, "pays", 2, 20);
+			String rue = Utils.getStringParameter(data, "rue", false, 2, 20);
+			String ville = Utils.getStringParameter(data, "ville", false,  2, 20);
+			String codePostal = Utils.getStringParameter(data, "code_postal", false, 2, 20,"/[0-9]{5}/g");
+			String pays = Utils.getStringParameter(data, "pays", false, 2, 20);
 		
 			
 			if(rue !=null) {
@@ -69,11 +65,11 @@ public class ServiceAdresse {
 	
 	public void modifier(JsonObject data) throws ServiceException{
 		try {		
-			String id = Utils.getStringParameter(data, "id", 0, 50);
-			String rue = Utils.getStringParameter(data, "rue",  2, 20);
-			String ville = Utils.getStringParameter(data, "ville", 2, 20);
-			String codePostal = Utils.getStringParameter(data, "code_postal",  2, 20);
-			String pays = Utils.getStringParameter(data, "pays", 2, 20);
+			String id = Utils.getStringParameter(data, "id", false, 0, 50, "^\\d+$");
+			String rue = Utils.getStringParameter(data, "rue", false,  2, 20);
+			String ville = Utils.getStringParameter(data, "ville", false, 2, 20);
+			String codePostal = Utils.getStringParameter(data, "code_postal", false,  2, 20,"/[0-9]{5}/g");
+			String pays = Utils.getStringParameter(data, "pays", false, 2, 20);
 			
 			//Création de l'auteur
 			Adresse adresse = daoAdresse.trouver(Long.parseLong(id));

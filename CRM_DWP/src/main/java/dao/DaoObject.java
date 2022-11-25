@@ -6,7 +6,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
-
 public abstract class DaoObject<T> {
 	protected DaoFactory factory;
 	private Class<T> className;
@@ -37,15 +36,30 @@ public abstract class DaoObject<T> {
 		return objects;
 	}
 	
-	public void supprimer(T object) throws DaoException{
+	public void supprimer(long id) throws DaoException{
 		EntityTransaction entityTransaction = null;
 
-		entityTransaction = factory.getEntityManager().getTransaction();
-		entityTransaction.begin();
+		try {
+			entityTransaction = factory.getEntityManager().getTransaction();
+			entityTransaction.begin();
+			
+			T object = factory.getEntityManager().find(className, id);
+			
+			factory.getEntityManager().remove(object);
+			
+			entityTransaction.commit();
+		} catch(NoResultException e) {
+			throw new DaoException("Erreur DAO");
+		} catch(Exception e) {
+			if(entityTransaction != null)
+				entityTransaction.rollback();
+
+			e.printStackTrace();
+			throw new DaoException("Erreur DAO");
+		} finally {
+			factory.releaseEntityManager();
+		}
 		
-		factory.getEntityManager().remove(object);
-		
-		entityTransaction.commit();
 	}
 	
 	public void ajouter(T object) throws DaoException{

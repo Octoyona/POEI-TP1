@@ -13,21 +13,29 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import adapters.ActeurAdapter;
 import adapters.AdresseAdapter;
-
+import adapters.PaiementAdapter;
+import adapters.ProduitAdapter;
 import model.Adresse;
-
+import model.Contient;
+import model.Paiement;
+import model.Panier;
+import model.Produit;
+import model.Client;
 
 public class Utils {
 	public static Gson getSuperJson() {
 		GsonBuilder gsonBuilder = new GsonBuilder()
+				.registerTypeAdapter(Panier.class, new ProduitAdapter())
+				.registerTypeAdapter(Paiement.class, new PaiementAdapter())
 				.registerTypeAdapter(Adresse.class, new AdresseAdapter())
-				.serializeNulls();
-				/*.registerTypeAdapter(Scenario.class, new ScenarioAdapter())
-				.registerTypeAdapter(Realisateur.class, new RealisateurAdapter());*/
-		Gson gson = gsonBuilder.create();
-		return gson;
+				.serializeNulls();/*
+				.registerTypeAdapter(Client.class, new ClientAdapter());
+				.registerTypeAdapter(Produit.class, new ProduitAdapter())
+				.registerTypeAdapter(Contient.class, new ContientAdapter())*/
+
+				
+		return gsonBuilder.create();
 	}
 	
 	public static JsonElement getJsonFromBuffer(HttpServletRequest request) throws IOException {
@@ -42,7 +50,7 @@ public class Utils {
 		return json;
 	}
 	
-	public static String getStringParameter (JsonObject data, String nameField, int minLength, int maxLength) throws ServiceException {
+	public static String getStringParameter (JsonObject data, String nameField, boolean isNullable, int minLength, int maxLength) throws ServiceException {
 		String parameter = null;
 		
 		if(data.get(nameField) != null && !data.get(nameField).isJsonNull()) {
@@ -57,11 +65,15 @@ public class Utils {
 			}
 		}
 		
+		if(!isNullable && parameter == null) {
+			throw new ServiceException("Le champ "+nameField+ " est obligatoire.");
+		}
+		
 		return parameter;
 	}
 	
-	public static String getStringParameter (JsonObject data, String nameField, int minLength, int maxLength, String regexFormat) throws ServiceException {
-		String parameter = getStringParameter(data, nameField, minLength, maxLength);
+	public static String getStringParameter (JsonObject data, String nameField, boolean isNullable, int minLength, int maxLength, String regexFormat) throws ServiceException {
+		String parameter = getStringParameter(data, nameField, isNullable, minLength, maxLength);
 		
 		if(parameter != null) {
 			if(!parameter.matches(regexFormat)) {
