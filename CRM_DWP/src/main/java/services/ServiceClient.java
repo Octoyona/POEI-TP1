@@ -62,6 +62,9 @@ public class ServiceClient {
 				if (adresse == null) {
 					throw new ServiceException("L'adresse n'existe pas. Id : " + idAdresse);
 				}
+				if(adresse.getClient() != null) {
+					throw new ServiceException("L'adresse est déja associee au client d'id : "+adresse.getClient().getId());
+				}
 			}
 
 			Client client = new Client();
@@ -76,6 +79,11 @@ public class ServiceClient {
 			//System.out.println(client.getAdresse().getRue());
 
 			daoClient.ajouter(client);
+
+			if(adresse != null) {
+				adresse.setClient(client);
+				daoAdresse.modifier(adresse);		
+			}
 
 		} catch (DaoException e) {
 			throw new ServiceException("Erreur DAO.");
