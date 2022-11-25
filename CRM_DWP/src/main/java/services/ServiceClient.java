@@ -1,7 +1,5 @@
 package services;
 
-import org.hibernate.service.spi.ServiceException;
-
 import com.google.gson.JsonObject;
 
 import dao.DaoException;

@@ -1,11 +1,11 @@
-CREATE TABLE produits (
+CREATE TABLE produit (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(255),
     description TEXT,
     prix FLOAT UNSIGNED
 );
 
-CREATE TABLE adresses (
+CREATE TABLE adresse (
     id INT PRIMARY KEY AUTO_INCREMENT,
     rue VARCHAR(255) NOT NULL,
     ville VARCHAR(255) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE adresses (
     pays VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE clients (
+CREATE TABLE client (
   id int(11) PRIMARY KEY AUTO_INCREMENT,
   nom varchar(255) NOT NULL,
   prenom varchar(255) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE clients (
   CONSTRAINT fk_adresse_clients FOREIGN KEY (id_adresse) REFERENCES adresses(id)
 );
 
-CREATE TABLE paiements(
+CREATE TABLE paiement(
     id INT PRIMARY KEY AUTO_INCREMENT,
     numero_carte VARCHAR(255) NOT NULL,
     code_confidentiel VARCHAR(4) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE paiements(
     CONSTRAINT fk_client_paiements FOREIGN KEY (id_client) REFERENCES clients(id)
 );
 
-CREATE TABLE paniers (
+CREATE TABLE panier (
     id INT PRIMARY KEY AUTO_INCREMENT,
     id_client INT NOT NULL,
     CONSTRAINT fk_client_paniers FOREIGN KEY (id_client) REFERENCES clients(id)

@@ -2,10 +2,7 @@ package utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.service.spi.ServiceException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,25 +11,30 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import adapters.AdresseAdapter;
+import adapters.ClientAdapter;
+import adapters.ContientAdapter;
 import adapters.PaiementAdapter;
+import adapters.PanierAdapter;
 import adapters.ProduitAdapter;
 import model.Adresse;
 import model.Contient;
 import model.Paiement;
 import model.Panier;
 import model.Produit;
+import services.ServiceException;
 import model.Client;
 
 public class Utils {
 	public static Gson getSuperJson() {
 		GsonBuilder gsonBuilder = new GsonBuilder()
-				.registerTypeAdapter(Panier.class, new ProduitAdapter())
+				.registerTypeAdapter(Panier.class, new PanierAdapter())
 				.registerTypeAdapter(Paiement.class, new PaiementAdapter())
 				.registerTypeAdapter(Adresse.class, new AdresseAdapter())
-				.serializeNulls();/*
-				.registerTypeAdapter(Client.class, new ClientAdapter());
 				.registerTypeAdapter(Produit.class, new ProduitAdapter())
-				.registerTypeAdapter(Contient.class, new ContientAdapter())*/
+				.registerTypeAdapter(Client.class, new ClientAdapter())
+				.registerTypeAdapter(Contient.class, new ContientAdapter())
+				.serializeNulls();
+
 
 				
 		return gsonBuilder.create();
@@ -57,11 +59,11 @@ public class Utils {
 			parameter = data.get(nameField).getAsString().trim();
 			
 			if(parameter.length()<minLength) {
-				throw new ServiceException("Le champ " + nameField + "doit contenir au minimum " + minLength + "caractères.");
+				throw new ServiceException("Le champ " + nameField + "doit contenir au minimum " + minLength + " caractères.");
 			}
 			
 			if(parameter.length()>maxLength) {
-				throw new ServiceException("Le champ " + nameField + "doit contenir au maximum " + maxLength + "caractères.");
+				throw new ServiceException("Le champ " + nameField + "doit contenir au maximum " + maxLength + " caractères.");
 			}
 		}
 		
