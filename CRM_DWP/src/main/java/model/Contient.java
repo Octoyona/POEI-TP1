@@ -52,6 +52,14 @@ public class Contient {
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
+	
+	public Panier getPanier() {
+		return panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
 
 	public int getQuantite() {
 		return quantite;
