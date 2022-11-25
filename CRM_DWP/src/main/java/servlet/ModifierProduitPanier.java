@@ -7,17 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ContientDao;
-import dao.DaoException;
-import dao.DaoFactory;
-import form.ClientForm;
 import form.ContientForm;
-import model.Client;
 import model.Contient;
 
-/**
- * Servlet implementation class ModifierProduit
- */
 @WebServlet("/modifierProduit")
 public class ModifierProduitPanier extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,8 +19,7 @@ public class ModifierProduitPanier extends HttpServlet {
 		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	
 		ContientForm contientForm = new ContientForm();
 		Contient contient = new Contient();
 		
