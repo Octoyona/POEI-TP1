@@ -43,24 +43,27 @@ public class ServiceClient {
 	}
 
 	public void ajouter(JsonObject data) throws ServiceException {
-		String nom = null, prenom = null, nomSociete = null, mail = null, telephone = null, etat = null, genre = null,
-				idAdresse = null;
-		Adresse adresse = null;
 
 		try {
-			nom = Utils.getStringParameter(data, "nom", false, 2, 255); 
-			prenom = Utils.getStringParameter(data, "prenom", false, 2, 255);
-			nomSociete = Utils.getStringParameter(data, "nomSociete", true, 0, 255);
-			mail = Utils.getStringParameter(data, "mail", true, 0, 255,"^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-			telephone = Utils.getStringParameter(data, "telephone", true, 0, 2,"(0|\\\\+33|0033)[1-9][0-9]{8}");
-			etat = Utils.getStringParameter(data, "etat", true, 0, 2, "^\\d+$");
-			genre = Utils.getStringParameter(data, "genre", true, 0, 2, "^\\d+$");
-			idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
+			String nom = Utils.getStringParameter(data, "nom", false, 2, 255); 
+			String prenom = Utils.getStringParameter(data, "prenom", false, 2, 255);
+			String nomSociete = Utils.getStringParameter(data, "nomSociete", true, 0, 255);
+			String mail = Utils.getStringParameter(data, "mail", true, 0, 255,"^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+			String telephone = Utils.getStringParameter(data, "telephone", true, 0, 20,"(0|\\\\+33|0033)[1-9][0-9]{8}");		
+			String etat = Utils.getStringParameter(data, "etat", true, 0, 2, "^\\d+$");
+			String genre = Utils.getStringParameter(data, "genre", true, 0, 2, "^\\d+$");
+			String idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
 
+			Adresse adresse = new Adresse();
+			DaoAdresse daoAdresse = new DaoAdresse();
 			if (idAdresse != null) {
 				adresse = daoAdresse.trouver(Long.parseLong(idAdresse));
+				//System.out.println(adresse.getRue());
 				if (adresse == null) {
 					throw new ServiceException("L'adresse n'existe pas. Id : " + idAdresse);
+				}
+				if(adresse.getClient() != null) {
+					throw new ServiceException("L'adresse est déja associee au client d'id : "+adresse.getClient().getId());
 				}
 			}
 
@@ -73,8 +76,14 @@ public class ServiceClient {
 			client.setEtat(Integer.parseInt(etat));
 			client.setGenre(Integer.parseInt(genre));
 			client.setAdresse(adresse);
+			//System.out.println(client.getAdresse().getRue());
 
 			daoClient.ajouter(client);
+
+			if(adresse != null) {
+				adresse.setClient(client);
+				daoAdresse.modifier(adresse);		
+			}
 
 		} catch (DaoException e) {
 			throw new ServiceException("Erreur DAO.");
@@ -83,21 +92,20 @@ public class ServiceClient {
 	}
 
 	public void update(JsonObject data) throws ServiceException {
-		String id = null, nom = null, prenom = null, nomSociete = null, mail = null, telephone = null, etat = null,
-				genre = null, idAdresse = null;
-		Adresse adresse = null;
 
 		try {
-			id = Utils.getStringParameter(data, "idClient", false, 0, 50, "^\\d+$");
-			nom = Utils.getStringParameter(data, "nom", false, 2, 255); // ajotuer dans Utils avec le boolean isNullable
-			prenom = Utils.getStringParameter(data, "prenom", false, 2, 255);
-			nomSociete = Utils.getStringParameter(data, "nomSociete", true, 0, 255);
-			mail = Utils.getStringParameter(data, "mail", true, 0, 255,"^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-			telephone = Utils.getStringParameter(data, "telephone", true, 0, 2,"(0|\\\\+33|0033)[1-9][0-9]{8}");
-			etat = Utils.getStringParameter(data, "etat", true, 0, 2, "^\\d+$");
-			genre = Utils.getStringParameter(data, "genre", true, 0, 2, "^\\d+$");
-			idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
+			String id = Utils.getStringParameter(data, "id", false, 0, 50, "^\\d+$");
+			String nom = Utils.getStringParameter(data, "nom", false, 2, 255);
+			String prenom = Utils.getStringParameter(data, "prenom", false, 2, 255);
+			String nomSociete = Utils.getStringParameter(data, "nomSociete", true, 0, 255);
+			String mail = Utils.getStringParameter(data, "mail", true, 0, 255,"^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+			String telephone = Utils.getStringParameter(data, "telephone", true, 0, 20,"(0|\\\\+33|0033)[1-9][0-9]{8}");
+			String etat = Utils.getStringParameter(data, "etat", true, 0, 2, "^\\d+$");
+			String genre = Utils.getStringParameter(data, "genre", true, 0, 2, "^\\d+$");
+			String idAdresse = Utils.getStringParameter(data, "idAdresse", true, 0, 50, "^\\d+$");
 
+			Adresse adresse = new Adresse();
+			DaoAdresse daoAdresse = new DaoAdresse();
 			if (idAdresse != null) {
 				adresse = daoAdresse.trouver(Long.parseLong(idAdresse));
 				if (adresse == null) {
@@ -119,7 +127,7 @@ public class ServiceClient {
 			client.setGenre(Integer.parseInt(genre));
 			client.setAdresse(adresse);
 
-			daoClient.modifier(client); // ne trouve pas update
+			daoClient.modifier(client); 
 
 		} catch (NumberFormatException e) {
 			throw new ServiceException("Le format du parametre idClient n'est pas bon.");

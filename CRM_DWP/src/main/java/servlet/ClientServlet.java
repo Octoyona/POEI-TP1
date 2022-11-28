@@ -27,7 +27,7 @@ public class ClientServlet extends HttpServlet {
 		int responseStatus = 200;
 		
 		try {
-			String idClient = request.getParameter("idClient");
+			String idClient = request.getParameter("id");
 			if(idClient != null) {
 				Long id = Long.parseLong(idClient);
 				if(id>0) {
@@ -65,7 +65,7 @@ public class ClientServlet extends HttpServlet {
 		int responseStatus = 200;
 		
 		try {
-			String idClient = request.getParameter("idClient");
+			String idClient = request.getParameter("id");
 			if(idClient != null) {
 				Long id = Long.parseLong(idClient);
 				if(id > 0) {
@@ -103,9 +103,7 @@ public class ClientServlet extends HttpServlet {
 		int responseStatus = 200;
 		
 		try {
-			JsonObject data = Utils.getJsonFromBuffer(request).getAsJsonObject(); 
-			new ServiceClient().ajouter(data);
-
+			new ServiceClient().ajouter(Utils.getJsonFromBuffer(request).getAsJsonObject());
 		} catch(JsonSyntaxException e) {
 			responseStatus = 400;
 			responseContent = "Erreur : Le format des donnees n'est pas bon, veuillez utiliser du JSON.";
